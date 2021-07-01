@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Specific of this repository
+*model.pdf
+rsnet.pdf
+tmp.dot
+build/
