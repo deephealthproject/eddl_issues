@@ -12,7 +12,10 @@ contain the result of different runs with the C++ and Python code.
 
 
 This folder also contains:
+
     - [here](data) the sample data provided by Wings to help us solve [*Issue 294*](https://github.com/deephealthproject/eddl/issues/294),
+
     - [here](python) a sample Python code with the same basic topology tested with _TensorFlow+Keras_ and to extract the sample data to the binary tensor format of the *EDDL*, and 
+
     - [here](scripts) some useful scripts to run the compile C++ code.
 
