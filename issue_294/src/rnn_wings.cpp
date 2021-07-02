@@ -67,6 +67,7 @@ int main(int argc, char **argv)
         in = Input({26});
         layer l = in; 
 
+        //l = ReLu(BatchNormalization(RNN(l, 256)));
         l = ReLu(BatchNormalization(GRU(l, 256)));
         //l = ReLu(BatchNormalization(LSTM(l, 256)));
         l = ReLu(BatchNormalization(Dense(l, 256)));
@@ -123,6 +124,9 @@ int main(int argc, char **argv)
     Tensor * Y_test  = Tensor::zeros(shape_Y_test);
     Tensor * z_train = Tensor::zeros(y_train->getShape());
     Tensor * z_test  = Tensor::zeros(y_test->getShape());
+
+    //X_train->fill_rand_normal_(0.0f, 1.0f);
+    //X_test->fill_rand_normal_(0.0f, 1.0f);
 
     if (output_softmax) {
         int stride = Y_train->stride[0];
