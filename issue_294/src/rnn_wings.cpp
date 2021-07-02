@@ -72,7 +72,7 @@ int main(int argc, char **argv)
         l = ReLu(BatchNormalization(Dense(l, 256)));
 
         if (output_softmax)
-            out = Softmax(Dense(l, num_classes));
+            out = Softmax(Dense(l, num_classes), 1);
         else
             out = Sigmoid(Dense(l, 1));
         net = Model({in}, {out});
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 
     // Build model
     build(net,
-          //sgd(0.1), // Optimizer
+          //sgd(1.0e-3), // Optimizer
           adam(1.0e-3), // Optimizer
           //adam(1.0e-4), // Optimizer
           //rmsprop(0.0001), // Optimizer
@@ -117,7 +117,6 @@ int main(int argc, char **argv)
     Tensor * y_train = Tensor::load("data/y_train.bin");
     Tensor * X_test  = Tensor::load("data/X_test.bin");
     Tensor * y_test  = Tensor::load("data/y_test.bin");
-
     vector<int> shape_Y_train = {y_train->getShape()[0], 1, output_softmax ? 2 : 1};
     vector<int> shape_Y_test  = {y_test->getShape()[0],  1, output_softmax ? 2 : 1};
     Tensor * Y_train = Tensor::zeros(shape_Y_train);
@@ -129,7 +128,7 @@ int main(int argc, char **argv)
         int stride = Y_train->stride[0];
         for (int i = 0; i < shape_Y_train[0]; i++) Y_train->ptr[i * stride + (y_train->ptr[i] == 1)] = 1;
         stride = Y_test->stride[0];
-        for (int i = 0; i < shape_Y_test[0]; i++) Y_test->ptr[i * stride + (y_test->ptr[i] == 1)] = 1;
+        for (int i = 0; i < shape_Y_test[0];  i++)  Y_test->ptr[i * stride + ( y_test->ptr[i] == 1)] = 1;
     } else {
         Tensor::copy(y_train, Y_train);
         Tensor::copy(y_test, Y_test);
@@ -147,6 +146,12 @@ int main(int argc, char **argv)
     // Preprocessing
     float mean = X_train->mean();
     float std = X_train->std();
+
+    /*
+    X_train->clamp_(mean - 3 * std, mean + 3 * std);
+    X_test->clamp_(mean - 3 * std, mean + 3 * std);
+    */
+    
     X_train->sub_(mean); X_train->div_(std);
      X_test->sub_(mean);  X_test->div_(std);
 
@@ -160,13 +165,28 @@ int main(int argc, char **argv)
         evaluate(net, {X_test}, {Y_test}, batch_size);
         */
         reset_loss(net);
-        for (int j = 0; j < (reduced ? 2 : std::ceil(X_train->shape[0] / batch_size)); j++) {
+        for (int j = 0; j < (reduced ? 2 : std::ceil(1.0 * X_train->shape[0] / batch_size)); j++) {
 
-            next_batch({X_train, Y_train}, {xbatch, ybatch});
+            //next_batch({X_train, Y_train}, {xbatch, ybatch});
+            ////////////////////////////////////////////////////////////////////////////
+            ///// TO DO NOT SHUFLE TRAINING SAMPLES ////////////////////////////////////
+            ///// AND TO DO NOT CHANGE THE NUMBER OF SAMPLES IN THE LAST BATCH /////////
+            ////////////////////////////////////////////////////////////////////////////
+            delete xbatch;
+            delete ybatch;
+            char batch_range[128];
+            int b_to = min(X_train->shape[0], (j + 1) * batch_size);
+            int b_from = b_to - batch_size;
+            sprintf(batch_range, "%d:%d", b_from, b_to);
+            xbatch = X_train->select({batch_range, ":", ":"});
+            //ybatch = Y_train->select({batch_range, ":", ":"});
+            ybatch = Y_train->select({batch_range, ":"});
+            ////////////////////////////////////////////////////////////////////////////
+
             train_batch(net, {xbatch}, {ybatch});
 
-            printf("epoch %d ", i);
-            print_loss(net,j);
+            printf("epoch %d  %s  ", i, batch_range);
+            print_loss(net, j + 1);
             printf("\r");
         }
         printf("\n");
@@ -205,13 +225,8 @@ void print_results(model net, Tensor * X, Tensor * y, Tensor * Y, Tensor * z, in
         sprintf(batch_range, "%d:%d", i, min(X->shape[0], i + batch_size));
         Tensor * sample = X->select({batch_range, ":", ":"});
         Tensor * output, * temp;
-        //if (i == 0) net->forward({sample}); // to force unrolling the recurrent net
         vtensor voutput = net->predict({sample});
         output = voutput[0];
-        /*
-        vlayer voutput_layer = forward(net, {sample});
-        output = getOutput(voutput_layer[0]);
-        */
 
         if (Y->shape[2] == 2) {
             if (debug) output->info();

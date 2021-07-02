@@ -45,7 +45,7 @@ model.summary()
 
 #optimizer = SGD(lr = 1.0e-2)
 #optimizer = RMSprop(lr = 1.0e-2)
-optimizer = Adam()
+optimizer = Adam(lr = 1.0e-3)
 model.compile(loss = 'categorical_crossentropy', optimizer = optimizer, metrics = ['accuracy'])
 
 model.fit(X_train, Y_train, batch_size = 10, epochs = 30, shuffle = True, verbose = 1, validation_data = (X_test, Y_test))

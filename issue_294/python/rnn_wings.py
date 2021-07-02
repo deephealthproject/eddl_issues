@@ -47,26 +47,37 @@ if __name__ == '__main__':
     # Settings
     num_classes = 2
 
-    # Define network
-    input_layer = eddl.Input([26])
-    _layer_ = input_layer
-
-    _layer_ = eddl.GRU(_layer_, 256)
-    #_layer_ = eddl.LSTM(_layer_, 256)
-    _layer_ = eddl.BatchNormalization(_layer_, True)
-    _layer_ = eddl.ReLu(_layer_)
-    _layer_ = eddl.Dense(_layer_, 256)
-    _layer_ = eddl.BatchNormalization(_layer_, True)
-    _layer_ = eddl.ReLu(_layer_)
-
     if output_softmax:
-        _layer_ = eddl.Dense(_layer_, num_classes)
-        output_layer = eddl.Softmax(_layer_)
+        filename = "models/rnn-with-output-softmax-start.onnx"
     else:
-        _layer_ = eddl.Dense(_layer_, 1)
-        output_layer = eddl.Sigmoid(_layer_)
+        filename = "models/rnn-with-output-sigmoid-start.onnx"
 
-    net = eddl.Model([input_layer], [output_layer]);
+    if os.path.exists(filename):
+        net = eddl.import_net_from_onnx_file(filename)
+        init_weights = False
+    else:
+        init_weights = True
+
+        # Define network
+        input_layer = eddl.Input([26])
+        _layer_ = input_layer
+
+        _layer_ = eddl.GRU(_layer_, 256)
+        #_layer_ = eddl.LSTM(_layer_, 256)
+        _layer_ = eddl.BatchNormalization(_layer_, True)
+        _layer_ = eddl.ReLu(_layer_)
+        _layer_ = eddl.Dense(_layer_, 256)
+        _layer_ = eddl.BatchNormalization(_layer_, True)
+        _layer_ = eddl.ReLu(_layer_)
+
+        if output_softmax:
+            _layer_ = eddl.Dense(_layer_, num_classes)
+            output_layer = eddl.Softmax(_layer_)
+        else:
+            _layer_ = eddl.Dense(_layer_, 1)
+            output_layer = eddl.Sigmoid(_layer_)
+
+        net = eddl.Model([input_layer], [output_layer]);
 
     if use_cpu:
         cs = eddl.CS_CPU(4)
@@ -75,13 +86,13 @@ if __name__ == '__main__':
 
     #optimizer = eddl.sgd(1.0e-3)
     #optimizer = eddl.rmspropo(1.0e-3)
-    optimizer = eddl.adam(1.0e-2)
+    optimizer = eddl.adam(1.0e-3)
 
     losses = ["softmax_cross_entropy"] if output_softmax else ["mse"]
     metrics = ["categorical_accuracy"] if output_softmax else ["binary_accuracy"]
 
     # Build model
-    eddl.build(net, optimizer, losses, metrics, cs = cs, init_weights = True)
+    eddl.build(net, optimizer, losses, metrics, cs = cs, init_weights = init_weights)
 
     # View model
     eddl.summary(net);
@@ -137,7 +148,6 @@ if __name__ == '__main__':
     X_train_np = (X_train_np - mean) / std
     X_test_np = (X_test_np - mean) / std
 
-    batches_x_epoch = len(X_train_np) // batch_size
     # Train model
     for epoch in range(epochs):
         '''
@@ -179,7 +189,7 @@ if __name__ == '__main__':
         cm_list[name] = (y_true, y_pred)
     #
 
-    log_file = open('report.log', 'at')
+    log_file = open('report-python.log', 'at')
     log_file.write(f'\nRUN at {time.asctime()} \n')
     log_file.write('    using ')
     log_file.write('softmax' if output_softmax else 'sigmoid')
@@ -195,4 +205,4 @@ if __name__ == '__main__':
         log_file.write('\n\n')
     log_file.close()
 
-    os.system("tail -n 36 report.log")
+    os.system("tail -n 36 report-python.log")
