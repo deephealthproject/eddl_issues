@@ -39,6 +39,7 @@ int main(int argc, char **argv)
     bool output_softmax = true;
     bool debug = false;
     bool create_a_new_net = false;
+    int testing_iterations = 1;
 
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--cpu") == 0) {
@@ -55,6 +56,8 @@ int main(int argc, char **argv)
             debug = true;
         } else if (strcmp(argv[i], "--create") == 0) {
             create_a_new_net = true;
+        } else if (strcmp(argv[i], "--repetitions") == 0) {
+            testing_iterations = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--reduced") == 0) {
             reduced = true;
         }
@@ -72,10 +75,10 @@ int main(int argc, char **argv)
         layer l = in; 
 
         l = Flatten(l);
-        l = ReLu(BatchNormalization(Dense(l, 512), true));
-        l = ReLu(BatchNormalization(Dense(l, 512), true));
-        //l = ReLu(Dense(l, 512));
-        //l = ReLu(Dense(l, 512));
+        //l = ReLu(BatchNormalization(Dense(l, 512), true, 0.990f));
+        //l = ReLu(BatchNormalization(Dense(l, 512), true, 0.990f));
+        l = ReLu(Dense(l, 512));
+        l = ReLu(Dense(l, 512));
 
         if (output_softmax)
             out = Softmax(Dense(l, num_classes), 1);
@@ -164,70 +167,84 @@ int main(int argc, char **argv)
     X_train->sub_(mean); X_train->div_(std);
      X_test->sub_(mean);  X_test->div_(std);
 
-    Tensor * xbatch = new Tensor({batch_size, X_train->shape[1]});
-    Tensor * ybatch = new Tensor({batch_size, Y_train->shape[1]});
 
-    // Train model
-    for (int i = 0; i < (reduced ? 1 : epochs); i++) {
-        /*
-        fit(net, {X_train}, {Y_train}, batch_size, 1);
-        evaluate(net, {X_test}, {Y_test}, batch_size);
-        */
-        reset_loss(net);
-        for (int j = 0; j < (reduced ? 2 : std::ceil(1.0 * X_train->shape[0] / batch_size)); j++) {
+    vector<vtensor> network_params  = net->get_parameters(true);
 
-            //next_batch({X_train, Y_train}, {xbatch, ybatch});
-            ////////////////////////////////////////////////////////////////////////////
-            ///// TO DO NOT SHUFLE TRAINING SAMPLES ////////////////////////////////////
-            ///// AND TO DO NOT CHANGE THE NUMBER OF SAMPLES IN THE LAST BATCH /////////
-            ////////////////////////////////////////////////////////////////////////////
-            delete xbatch;
-            delete ybatch;
-            char batch_range[128];
-            /* Use these two lines to do not change the batch size in the last batch
-            int b_to = min(X_train->shape[0], (j + 1) * batch_size);
-            int b_from = b_to - batch_size;
+    for (int testing_iteration = 0; testing_iteration < testing_iterations; ++testing_iteration) {
+
+        net->set_parameters(network_params);
+
+        Tensor * xbatch = new Tensor({batch_size, X_train->shape[1]});
+        Tensor * ybatch = new Tensor({batch_size, Y_train->shape[1]});
+
+        // Train model
+        for (int i = 0; i < (reduced ? 1 : epochs); i++) {
+            /*
+            fit(net, {X_train}, {Y_train}, batch_size, 1);
+            evaluate(net, {X_test}, {Y_test}, batch_size);
             */
-            int b_from = j * batch_size;
-            int b_to = min(b_from + batch_size, X_train->shape[0]);
-            sprintf(batch_range, "%d:%d", b_from, b_to);
-            xbatch = X_train->select({batch_range, ":", ":"});
-            ybatch = Y_train->select({batch_range, ":"});
-            ////////////////////////////////////////////////////////////////////////////
+            reset_loss(net);
 
-printf("\n ALPHA %s \n", batch_range), fflush(stdout);
-            train_batch(net, {xbatch}, {ybatch});
-printf("\n BRAVO\n"), fflush(stdout);
-            vlayer output_layers = getOut(net);
-            Tensor *output = getOutput(output_layers[0]);
-            output_to_z(output, z_train, j * batch_size, b_to - b_from /* batch_size */);
-            delete output;
+            //batch_size = (batch_size == 10) ? 20 : 10;
+            //net->resize(batch_size);
 
-            printf("\repoch %d  %s  ", i, batch_range);
-            print_loss(net, j + 1);
+            // for (int j = 0; j < (reduced ? 2 : std::ceil(1.0 * X_train->shape[0] / batch_size)); j++)
+            for (int j = 0; j < (reduced ? 2 : std::floor(1.0 * X_train->shape[0] / batch_size)); j++) // using floor to avoid resizing within a epoch
+            {
+                //next_batch({X_train, Y_train}, {xbatch, ybatch});
+                ////////////////////////////////////////////////////////////////////////////
+                ///// TO DO NOT SHUFLE TRAINING SAMPLES ////////////////////////////////////
+                ///// AND TO DO NOT CHANGE THE NUMBER OF SAMPLES IN THE LAST BATCH /////////
+                ////////////////////////////////////////////////////////////////////////////
+                delete xbatch;
+                delete ybatch;
+                char batch_range[128];
+                /* Use these two lines to do not change the batch size in the last batch
+                int b_to = min(X_train->shape[0], (j + 1) * batch_size);
+                int b_from = b_to - batch_size;
+                */
+                int b_from = j * batch_size;
+                int b_to = min(b_from + batch_size, X_train->shape[0]);
+                sprintf(batch_range, "%d:%d", b_from, b_to);
+                xbatch = X_train->select({batch_range, ":", ":"});
+                ybatch = Y_train->select({batch_range, ":"});
+                ////////////////////////////////////////////////////////////////////////////
+
+                train_batch(net, {xbatch}, {ybatch});
+                vlayer output_layers = getOut(net);
+                Tensor *output = getOutput(output_layers[0]);
+                output_to_z(output, z_train, j * batch_size, b_to - b_from /* batch_size */);
+                delete output;
+
+                printf("\repoch %d  %s  ", i, batch_range);
+                print_loss(net, j + 1);
+            }
+            printf("   accuracy of the training set during: %.8f\n", accuracy(y_train, z_train));
         }
-        printf("   accuracy of the training set during: %.8f\n", accuracy(y_train, z_train));
+
+        if (epochs > 0 && testing_iterations == 1) {
+            string filename = string("models/fully-conn-with-output-") + (output_softmax ? "softmax" : "sigmoid") + "-trained.onnx";
+            save_net_to_onnx_file(net, filename);
+            delete net;
+
+            net = import_net_from_onnx_file(filename);
+
+            // Build model
+            cs = (use_cpu) ? CS_CPU() : CS_GPU({1}, "full_mem");
+
+            build(net,
+              adam(1.0e-3), // Optimizer
+              {output_softmax ? "softmax_cross_entropy" : "binary_cross_entropy"}, // Losses
+              {output_softmax ? "categorical_accuracy" : "binary_accuracy"}, // Metrics
+              cs, false);
+        }
+
+        print_results(net, X_train, y_train, Y_train, z_train, batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
+        print_results(net, X_test,  y_test,  Y_test,  z_test,  batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
+
+        delete xbatch;
+        delete ybatch;
     }
-
-    if (epochs > 0) {
-        string filename = string("models/fully-conn-with-output-") + (output_softmax ? "softmax" : "sigmoid") + "-trained.onnx";
-        save_net_to_onnx_file(net, filename);
-        //delete net;
-
-        net = import_net_from_onnx_file(filename);
-
-        // Build model
-        cs = (use_cpu) ? CS_CPU() : CS_GPU({1}, "full_mem");
-
-        build(net,
-          adam(1.0e-3), // Optimizer
-          {output_softmax ? "softmax_cross_entropy" : "binary_cross_entropy"}, // Losses
-          {output_softmax ? "categorical_accuracy" : "binary_accuracy"}, // Metrics
-          cs, false);
-    }
-
-    print_results(net, X_train, y_train, Y_train, z_train, batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
-    print_results(net, X_test,  y_test,  Y_test,  z_test,  batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
 
     delete X_train;
     delete y_train;
@@ -237,11 +254,7 @@ printf("\n BRAVO\n"), fflush(stdout);
     delete Y_test;
     delete z_train;
     delete z_test;
-    delete xbatch;
-    delete ybatch;
-    /*
     delete net;
-    */
 
 
     //system("tail -n 30 report-cpp.log");

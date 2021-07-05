@@ -1,13 +1,13 @@
 
 
-RUN at Sun Jul  4 23:31:24 2021
-    using sigmoid as the activation for the output layer
-    trained during 20 epochs
+RUN at Tue Jul  6 00:04:46 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
 ---------------------------------------
          0         1
 ---------------------------------------
-0      626        17   TN, FN
-1       23       125   FP, TP
+0      649         1   TN, FN
+1        0       141   FP, TP
 ---------------------------------------
        649       142   N,  P  (total)
 ---------------------------------------
@@ -15,14 +15,14 @@ RUN at Sun Jul  4 23:31:24 2021
 
 
 
-RUN at Sun Jul  4 23:31:24 2021
-    using sigmoid as the activation for the output layer
-    trained during 20 epochs
+RUN at Tue Jul  6 00:04:46 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
 ---------------------------------------
          0         1
 ---------------------------------------
-0      143        23   TN, FN
-1       23         9   FP, TP
+0      144        24   TN, FN
+1       22         8   FP, TP
 ---------------------------------------
        166        32   N,  P  (total)
 ---------------------------------------
@@ -30,14 +30,14 @@ RUN at Sun Jul  4 23:31:24 2021
 
 
 
-RUN at Sun Jul  4 23:35:03 2021
+RUN at Tue Jul  6 00:04:49 2021
     using softmax as the activation for the output layer
-    trained during 20 epochs
+    trained during 50 epochs
 ---------------------------------------
          0         1
 ---------------------------------------
-0      640         5   TN, FN
-1        9       137   FP, TP
+0      649         1   TN, FN
+1        0       141   FP, TP
 ---------------------------------------
        649       142   N,  P  (total)
 ---------------------------------------
@@ -45,14 +45,254 @@ RUN at Sun Jul  4 23:35:03 2021
 
 
 
-RUN at Sun Jul  4 23:35:03 2021
+RUN at Tue Jul  6 00:04:49 2021
     using softmax as the activation for the output layer
-    trained during 20 epochs
+    trained during 50 epochs
 ---------------------------------------
          0         1
 ---------------------------------------
-0      141        24   TN, FN
-1       25         8   FP, TP
+0      147        27   TN, FN
+1       19         5   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:04:53 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      649         1   TN, FN
+1        0       141   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:04:53 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      145        23   TN, FN
+1       21         9   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:04:57 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      648         1   TN, FN
+1        1       141   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:04:57 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      147        26   TN, FN
+1       19         6   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:00 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      649         7   TN, FN
+1        0       135   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:00 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      148        26   TN, FN
+1       18         6   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:04 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      635        17   TN, FN
+1       14       125   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:04 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      146        27   TN, FN
+1       20         5   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:07 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      633         1   TN, FN
+1       16       141   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:07 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      131        22   TN, FN
+1       35        10   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:11 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      648         1   TN, FN
+1        1       141   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:11 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      152        27   TN, FN
+1       14         5   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:14 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      645         0   TN, FN
+1        4       142   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:14 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      139        26   TN, FN
+1       27         6   FP, TP
+---------------------------------------
+       166        32   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:18 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      649         1   TN, FN
+1        0       141   FP, TP
+---------------------------------------
+       649       142   N,  P  (total)
+---------------------------------------
+
+
+
+
+RUN at Tue Jul  6 00:05:18 2021
+    using softmax as the activation for the output layer
+    trained during 50 epochs
+---------------------------------------
+         0         1
+---------------------------------------
+0      145        26   TN, FN
+1       21         6   FP, TP
 ---------------------------------------
        166        32   N,  P  (total)
 ---------------------------------------
