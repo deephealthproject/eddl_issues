@@ -25,6 +25,11 @@ using namespace eddl;
 
 bool reduced = false;
 
+void output_to_z(Tensor * & output, Tensor * z, int i, int batch_size);
+void print_results(model, Tensor *, Tensor *, Tensor *, Tensor *, int, bool, int, const char *);
+float accuracy(Tensor * y_true, Tensor * y_pred);
+
+
 int main(int argc, char **argv)
 {
     // Default settings
@@ -67,10 +72,10 @@ int main(int argc, char **argv)
         layer l = in; 
 
         l = Flatten(l);
-        //l = ReLu(BatchNormalization(Dense(l, 512));
-        //l = ReLu(BatchNormalization(Dense(l, 512));
-        l = ReLu(Dense(l, 512));
-        l = ReLu(Dense(l, 512));
+        l = ReLu(BatchNormalization(Dense(l, 512), true));
+        l = ReLu(BatchNormalization(Dense(l, 512), true));
+        //l = ReLu(Dense(l, 512));
+        //l = ReLu(Dense(l, 512));
 
         if (output_softmax)
             out = Softmax(Dense(l, num_classes), 1);
@@ -179,38 +184,64 @@ int main(int argc, char **argv)
             delete xbatch;
             delete ybatch;
             char batch_range[128];
+            /* Use these two lines to do not change the batch size in the last batch
             int b_to = min(X_train->shape[0], (j + 1) * batch_size);
             int b_from = b_to - batch_size;
+            */
+            int b_from = j * batch_size;
+            int b_to = min(b_from + batch_size, X_train->shape[0]);
             sprintf(batch_range, "%d:%d", b_from, b_to);
             xbatch = X_train->select({batch_range, ":", ":"});
             ybatch = Y_train->select({batch_range, ":"});
             ////////////////////////////////////////////////////////////////////////////
 
+printf("\n ALPHA %s \n", batch_range), fflush(stdout);
             train_batch(net, {xbatch}, {ybatch});
+printf("\n BRAVO\n"), fflush(stdout);
+            vlayer output_layers = getOut(net);
+            Tensor *output = getOutput(output_layers[0]);
+            output_to_z(output, z_train, j * batch_size, b_to - b_from /* batch_size */);
+            delete output;
 
-            printf("epoch %d  %s  ", i, batch_range);
+            printf("\repoch %d  %s  ", i, batch_range);
             print_loss(net, j + 1);
-            printf("\r");
         }
-        printf("\n");
+        printf("   accuracy of the training set during: %.8f\n", accuracy(y_train, z_train));
     }
 
-    void print_results(model, Tensor *, Tensor *, Tensor *, Tensor *, int, bool, int, const char *);
+    if (epochs > 0) {
+        string filename = string("models/fully-conn-with-output-") + (output_softmax ? "softmax" : "sigmoid") + "-trained.onnx";
+        save_net_to_onnx_file(net, filename);
+        //delete net;
+
+        net = import_net_from_onnx_file(filename);
+
+        // Build model
+        cs = (use_cpu) ? CS_CPU() : CS_GPU({1}, "full_mem");
+
+        build(net,
+          adam(1.0e-3), // Optimizer
+          {output_softmax ? "softmax_cross_entropy" : "binary_cross_entropy"}, // Losses
+          {output_softmax ? "categorical_accuracy" : "binary_accuracy"}, // Metrics
+          cs, false);
+    }
 
     print_results(net, X_train, y_train, Y_train, z_train, batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
     print_results(net, X_test,  y_test,  Y_test,  z_test,  batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
 
     delete X_train;
     delete y_train;
-    delete Y_train;
-    delete z_train;
     delete X_test;
     delete y_test;
+    delete Y_train;
     delete Y_test;
+    delete z_train;
     delete z_test;
     delete xbatch;
     delete ybatch;
+    /*
     delete net;
+    */
 
 
     //system("tail -n 30 report-cpp.log");
@@ -220,6 +251,32 @@ int main(int argc, char **argv)
 }
 
 
+void output_to_z(Tensor *  & output, Tensor * z, int i, int batch_size)
+{
+    if (output->shape.size() > 2) {
+        msg("Unexpected shape for output!");
+    } else if (output->shape[1] == 2) {
+        Tensor * temp = output;
+        output = temp->argmax({1}, false);
+        delete temp;
+    }
+
+    for (int b = 0; b < batch_size; b++)
+        if (i + b < z->shape[0])
+            z->ptr[i + b] = output->ptr[b];
+}
+
+float accuracy(Tensor * y_true, Tensor * y_pred)
+{
+    float tp = 0, fp = 0, tn = 0, fn = 0, p = 0, n = 0;
+    for (int i = 0; i < y_true->shape[0]; i++) {
+        if (y_true->ptr[i] == 0) { ++n; if (y_pred->ptr[i] < 0.5) ++tn; else ++fp; }
+        else                     { ++p; if (y_pred->ptr[i] < 0.5) ++fn; else ++tp; }
+    }
+
+    return (tn + tp) / (n + p);
+}
+
 void print_results(model net, Tensor * X, Tensor * y, Tensor * Y, Tensor * z, int batch_size, bool debug, int epochs, const char * output_activation)
 {
     net->setmode(TSMODE);
@@ -227,25 +284,11 @@ void print_results(model net, Tensor * X, Tensor * y, Tensor * Y, Tensor * z, in
         char batch_range[128];
         sprintf(batch_range, "%d:%d", i, min(X->shape[0], i + batch_size));
         Tensor * sample = X->select({batch_range, ":", ":"});
-        Tensor * output, * temp;
+        Tensor * output;
         vtensor voutput = net->predict({sample});
         output = voutput[0];
 
-        if (output->shape.size() > 2) {
-            msg("Unexpected shape for output!");
-        } else if (output->shape[1] == 2) {
-            if (strcmp(output_activation, "softmax") != 0) msg("something is wrong!");
-            if (debug) output->info();
-            temp = output;
-            output = temp->argmax({1}, false);
-            delete temp;
-            if (debug) output->info();
-        } else 
-            if (strcmp(output_activation, "sigmoid") != 0) msg("something is wrong!");
-
-        for (int b = 0; b < batch_size; b++)
-            if (i + b < z->shape[0])
-                z->ptr[i + b] = output->ptr[b];
+        output_to_z(output, z, i, batch_size);
 
         delete output;
         delete sample;

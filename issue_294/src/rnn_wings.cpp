@@ -67,14 +67,10 @@ int main(int argc, char **argv)
         in = Input({26});
         layer l = in; 
 
-        /*
         //l = ReLu(BatchNormalization(RNN(l, 256)));
         l = ReLu(BatchNormalization(GRU(l, 256)));
         //l = ReLu(BatchNormalization(LSTM(l, 256)));
         l = ReLu(BatchNormalization(Dense(l, 256)));
-        */
-        l = ReLu(GRU(l, 256));
-        l = ReLu(Dense(l, 256));
 
         if (output_softmax)
             out = Softmax(Dense(l, num_classes), 1);
