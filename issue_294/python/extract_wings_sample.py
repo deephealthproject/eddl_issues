@@ -48,6 +48,7 @@ print(X.shape, X.min(), X.max(), X.ptp(), X.mean(), X.std())
 print(y.shape, y.min(), y.max(), y.ptp())
 
 '''
+'''
 # Uncomment these lines to generate synthetic samples for
 # a sanity check of the models.
 # Syntetic data must runs OK
@@ -57,6 +58,7 @@ for i in range(len(X)):
         X[i, :, :] = 10 + numpy.random.randn(X.shape[1], X.shape[2]) * 3
     else:
         X[i, :, :] = -3 + numpy.random.randn(X.shape[1], X.shape[2]) * 10
+'''
 '''
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 0)

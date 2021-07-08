@@ -75,10 +75,10 @@ int main(int argc, char **argv)
         layer l = in; 
 
         l = Flatten(l);
-        //l = ReLu(BatchNormalization(Dense(l, 512), true, 0.990f));
-        //l = ReLu(BatchNormalization(Dense(l, 512), true, 0.990f));
-        l = ReLu(Dense(l, 512));
-        l = ReLu(Dense(l, 512));
+        l = ReLu(BatchNormalization(Dense(l, 512), true, 0.990f));
+        l = ReLu(BatchNormalization(Dense(l, 512), true, 0.990f));
+        //l = ReLu(Dense(l, 512));
+        //l = ReLu(Dense(l, 512));
 
         if (output_softmax)
             out = Softmax(Dense(l, num_classes), 1);
@@ -89,6 +89,14 @@ int main(int argc, char **argv)
     } else {
         string filename = string("models/fully-conn-with-output-") + (output_softmax ? "softmax" : "sigmoid") + "-start.onnx";
         net = import_net_from_onnx_file(filename, DEV_CPU);
+
+        for (auto & l : net->layers) {
+            std::cout << l->name << std::endl;
+            if (l->name.find("batchnorm") == 0) {
+                l->params[2]->fill_(0.0);
+                l->params[3]->fill_(1.0);
+            }
+        }
     }
 
     // dot from graphviz should be installed:
@@ -103,7 +111,7 @@ int main(int argc, char **argv)
 
     // Build model
     build(net,
-          //sgd(1.0e-3), // Optimizer
+          //sgd(1.0e-1), // Optimizer
           adam(1.0e-3), // Optimizer
           //adam(1.0e-4), // Optimizer
           //rmsprop(0.0001), // Optimizer
@@ -156,6 +164,15 @@ int main(int argc, char **argv)
 
 
     // Preprocessing
+    /*
+    Tensor * x = Tensor::randn(X_train->shape);
+    Tensor::copy(X_train, x);
+    delete x;
+    x = Tensor::randn(X_test->shape);
+    Tensor::copy(X_test, x);
+    delete x;
+    */
+
     float mean = X_train->mean();
     float std = X_train->std();
 

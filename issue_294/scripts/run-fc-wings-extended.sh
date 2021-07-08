@@ -3,7 +3,7 @@
 
 for output_type in "sigmoid" "softmax"
 do
-    for device_type in "cpu" "gpu"
+    for device_type in "cpu" # "gpu"
     do
 
         rm -f report-cpp.log
