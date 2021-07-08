@@ -16,6 +16,8 @@ from tensorflow.keras.optimizers import RMSprop, Adam, SGD
 from tensorflow.keras.constraints import max_norm
 from tensorflow.keras.utils import to_categorical
 
+output_softmax = True # manually set
+epochs = 50 # manually set
 
 
 f = open('data/data.pckl', 'rb')
@@ -54,7 +56,7 @@ optimizer = Adam(learning_rate = 1.0e-3)
 model.compile(loss = 'categorical_crossentropy', optimizer = optimizer, metrics = ['accuracy'])
 model.summary()
 
-model.fit(X_train, Y_train, batch_size = 10, epochs = 30, shuffle = True, verbose = 1, validation_data = (X_test, Y_test))
+model.fit(X_train, Y_train, batch_size = 10, epochs = epochs, shuffle = True, verbose = 1, validation_data = (X_test, Y_test))
 
 score = model.evaluate(X_test, Y_test, verbose = 0)
 print(score)
@@ -70,8 +72,6 @@ cm_list = dict()
 cm_list['train'] = (y_train, z_train)
 cm_list['test'] = (y_test, z_test)
 
-output_softmax = True # manually set
-epochs = 30 # manually set
 
 log_file = open('report-keras.log', 'at')
 log_file.write(f'\nRUN at {time.asctime()} \n')

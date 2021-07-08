@@ -266,10 +266,10 @@ void print_results(model net, Tensor * X, Tensor * y, Tensor * Y, Tensor * z, in
     fprintf(log_file, "    using %s as the activation for the output layer\n", output_activation);
     fprintf(log_file, "    trained during %d epochs\n", epochs);
     fprintf(log_file, "---------------------------------------\n");
-    fprintf(log_file, "    %6d    %6d\n", 0, 1);   
+    fprintf(log_file, "    %6d    %6d         accuracy = %.8f\n", 0, 1, 1.0 * (tn + tp) / (n + p));
     fprintf(log_file, "---------------------------------------\n");
-    fprintf(log_file, "0   %6d    %6d   TN, FN\n", tn, fn);
-    fprintf(log_file, "1   %6d    %6d   FP, TP\n", fp, tp);
+    fprintf(log_file, "0   %6d    %6d   TN, FP\n", tn, fp);
+    fprintf(log_file, "1   %6d    %6d   FN, TP\n", fn, tp);
     fprintf(log_file, "---------------------------------------\n");
     fprintf(log_file, "    %6d    %6d   N,  P  (total)\n", n, p);
     fprintf(log_file, "---------------------------------------\n");

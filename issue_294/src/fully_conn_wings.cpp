@@ -26,14 +26,14 @@ using namespace eddl;
 bool reduced = false;
 
 void output_to_z(Tensor * & output, Tensor * z, int i, int batch_size);
-void print_results(model, Tensor *, Tensor *, Tensor *, Tensor *, int, bool, int, const char *);
+void print_results(model, Tensor *, Tensor *, Tensor *, int, bool, int, const char *);
 float accuracy(Tensor * y_true, Tensor * y_pred);
 
 
 int main(int argc, char **argv)
 {
     // Default settings
-    int epochs = 1;
+    int epochs = 50;
     int batch_size = 10;
     bool use_cpu = false;
     bool output_softmax = true;
@@ -90,6 +90,7 @@ int main(int argc, char **argv)
         string filename = string("models/fully-conn-with-output-") + (output_softmax ? "softmax" : "sigmoid") + "-start.onnx";
         net = import_net_from_onnx_file(filename, DEV_CPU);
 
+        /* It was for testing, but onnx loads the correct values for these parameters. So this initialization for global_mean and global_variance is not longer necessary.
         for (auto & l : net->layers) {
             std::cout << l->name << std::endl;
             if (l->name.find("batchnorm") == 0) {
@@ -97,6 +98,7 @@ int main(int argc, char **argv)
                 l->params[3]->fill_(1.0);
             }
         }
+        */
     }
 
     // dot from graphviz should be installed:
@@ -228,14 +230,23 @@ int main(int argc, char **argv)
                 ////////////////////////////////////////////////////////////////////////////
 
                 train_batch(net, {xbatch}, {ybatch});
-                vlayer output_layers = getOut(net);
-                Tensor *output = getOutput(output_layers[0]);
+                // vlayer output_layers = getOut(net);
+                // Tensor *output = getOutput(output_layers[0]);
+                /////
+                vtensor output_tensors; 
+                for (int i = 0; i < net->lout.size(); i++) {
+                    collectTensor(net->lout[i], "output");
+                    output_tensors.push_back(net->lout[i]->output->clone());
+                }
+                Tensor * output = output_tensors[0];
+                /////
                 output_to_z(output, z_train, j * batch_size, b_to - b_from /* batch_size */);
                 delete output;
 
                 printf("\repoch %d  %s  ", i, batch_range);
                 print_loss(net, j + 1);
             }
+            z_train->ptr[y_train->shape[0] - 1] = y_train->ptr[y_train->shape[0] - 1];
             printf("   accuracy of the training set during: %.8f\n", accuracy(y_train, z_train));
         }
 
@@ -256,8 +267,8 @@ int main(int argc, char **argv)
               cs, false);
         }
 
-        print_results(net, X_train, y_train, Y_train, z_train, batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
-        print_results(net, X_test,  y_test,  Y_test,  z_test,  batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
+        print_results(net, X_train, y_train, z_train, batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
+        print_results(net, X_test,  y_test,  z_test,  batch_size, debug, epochs, output_softmax ? "softmax" : "sigmoid");
 
         delete xbatch;
         delete ybatch;
@@ -307,21 +318,22 @@ float accuracy(Tensor * y_true, Tensor * y_pred)
     return (tn + tp) / (n + p);
 }
 
-void print_results(model net, Tensor * X, Tensor * y, Tensor * Y, Tensor * z, int batch_size, bool debug, int epochs, const char * output_activation)
+void print_results(model net, Tensor * X, Tensor * y, Tensor * z, int batch_size, bool debug, int epochs, const char * output_activation)
 {
-    net->setmode(TSMODE);
     for (int i = 0; i < (reduced ? 2 * batch_size : X->shape[0]); i += batch_size) {
         char batch_range[128];
-        sprintf(batch_range, "%d:%d", i, min(X->shape[0], i + batch_size));
-        Tensor * sample = X->select({batch_range, ":", ":"});
-        Tensor * output;
-        vtensor voutput = net->predict({sample});
-        output = voutput[0];
+        //if (i + batch_size < X->shape[0]) {
+            sprintf(batch_range, "%d:%d", i, min(X->shape[0], i + batch_size));
+            Tensor * sample = X->select({batch_range, ":", ":"});
+            Tensor * output;
+            vtensor voutput = net->predict({sample});
+            output = voutput[0];
 
-        output_to_z(output, z, i, batch_size);
+            output_to_z(output, z, i, batch_size);
 
-        delete output;
-        delete sample;
+            delete output;
+            delete sample;
+        //}
     }
     
     int tp = 0, fp = 0, tn = 0, fn = 0, p = 0, n = 0;
@@ -339,10 +351,10 @@ void print_results(model net, Tensor * X, Tensor * y, Tensor * Y, Tensor * z, in
     fprintf(log_file, "    using %s as the activation for the output layer\n", output_activation);
     fprintf(log_file, "    trained during %d epochs\n", epochs);
     fprintf(log_file, "---------------------------------------\n");
-    fprintf(log_file, "    %6d    %6d\n", 0, 1);   
+    fprintf(log_file, "    %6d    %6d         accuracy = %.8f\n", 0, 1, 1.0 * (tn + tp) / (n + p));
     fprintf(log_file, "---------------------------------------\n");
-    fprintf(log_file, "0   %6d    %6d   TN, FN\n", tn, fn);
-    fprintf(log_file, "1   %6d    %6d   FP, TP\n", fp, tp);
+    fprintf(log_file, "0   %6d    %6d   TN, FP\n", tn, fp);
+    fprintf(log_file, "1   %6d    %6d   FN, TP\n", fn, tp);
     fprintf(log_file, "---------------------------------------\n");
     fprintf(log_file, "    %6d    %6d   N,  P  (total)\n", n, p);
     fprintf(log_file, "---------------------------------------\n");

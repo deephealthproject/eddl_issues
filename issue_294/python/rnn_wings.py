@@ -64,7 +64,8 @@ if __name__ == '__main__':
 
         _layer_ = eddl.GRU(_layer_, 256)
         #_layer_ = eddl.LSTM(_layer_, 256)
-        _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
+        #_layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
+        _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.990)
         _layer_ = eddl.ReLu(_layer_)
         '''
         input_layer = eddl.Input([7, 26])
@@ -74,7 +75,8 @@ if __name__ == '__main__':
         '''
 
         _layer_ = eddl.Dense(_layer_, 256)
-        _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
+        #_layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
+        _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.990)
         _layer_ = eddl.ReLu(_layer_)
 
 
@@ -93,7 +95,7 @@ if __name__ == '__main__':
         cs = eddl.CS_GPU([1], mem = "full_mem")
 
     #optimizer = eddl.sgd(1.0e-3)
-    #optimizer = eddl.rmspropo(1.0e-3)
+    #optimizer = eddl.rmsprop(1.0e-3)
     optimizer = eddl.adam(1.0e-3)
 
     losses = ["softmax_cross_entropy"] if output_softmax else ["binary_cross_entropy"]
