@@ -1,7 +1,8 @@
 import os
 import sys
-import pickle
+import time
 import numpy
+import pickle
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -9,7 +10,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 from tensorflow import keras
 from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.models import Sequential, Model, load_model
 from tensorflow.keras.layers import Dense, Dropout, GaussianNoise, BatchNormalization, Input, LSTM, GRU, Flatten, ReLU
 from tensorflow.keras.optimizers import RMSprop, Adam, SGD
 from tensorflow.keras.constraints import max_norm
@@ -40,13 +41,18 @@ l = ReLU()(l)
 l_output = Dense(2, activation = 'softmax')(l)
 
 model = Model([l_input], [l_output])
-model.summary()
 
+filename = 'models/keras-rnn.h5'
+if os.path.exists(filename):
+    model = load_model(filename)
+else:
+    model.save(filename)
 
-#optimizer = SGD(lr = 1.0e-2)
-#optimizer = RMSprop(lr = 1.0e-2)
-optimizer = Adam(lr = 1.0e-3)
+#optimizer = SGD(learning_rate = 1.0e-2)
+#optimizer = RMSprop(learning_rate = 1.0e-2)
+optimizer = Adam(learning_rate = 1.0e-3)
 model.compile(loss = 'categorical_crossentropy', optimizer = optimizer, metrics = ['accuracy'])
+model.summary()
 
 model.fit(X_train, Y_train, batch_size = 10, epochs = 30, shuffle = True, verbose = 1, validation_data = (X_test, Y_test))
 
@@ -57,5 +63,30 @@ print(score)
 z_train = model.predict(X_train).argmax(axis = 1)
 z_test = model.predict(X_test).argmax(axis = 1)
 
-print(confusion_matrix(y_train, z_train))
-print(confusion_matrix(y_test, z_test))
+#print(confusion_matrix(y_train, z_train))
+#print(confusion_matrix(y_test, z_test))
+
+cm_list = dict()
+cm_list['train'] = (y_train, z_train)
+cm_list['test'] = (y_test, z_test)
+
+output_softmax = True # manually set
+epochs = 30 # manually set
+
+log_file = open('report-keras.log', 'at')
+log_file.write(f'\nRUN at {time.asctime()} \n')
+log_file.write('    using ')
+log_file.write('softmax' if output_softmax else 'sigmoid')
+log_file.write(' as the activation for the output layer\n')
+log_file.write(f'    trained during {epochs} epochs\n')
+for key, (y_true, y_pred) in cm_list.items():
+    log_file.write('\n')
+    log_file.write(f'Confusion matrix for subset {key}:\n')
+    log_file.write(str(confusion_matrix(y_true, y_pred, labels = [0, 1])))
+    log_file.write('\n\n')
+    log_file.write(f'Classification  report for subset {key}:\n')
+    log_file.write(classification_report(y_true, y_pred))
+    log_file.write('\n\n')
+log_file.close()
+
+os.system("tail -n 36 report-keras.log")

@@ -1,0 +1,288 @@
+
+RUN at Thu Jul  8 12:33:44 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[604  45]
+ [ 19 123]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.97      0.93      0.95       649
+           1       0.73      0.87      0.79       142
+
+    accuracy                           0.92       791
+   macro avg       0.85      0.90      0.87       791
+weighted avg       0.93      0.92      0.92       791
+
+
+
+Confusion matrix for subset test:
+[[136  30]
+ [ 22  10]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.86      0.82      0.84       166
+           1       0.25      0.31      0.28        32
+
+    accuracy                           0.74       198
+   macro avg       0.56      0.57      0.56       198
+weighted avg       0.76      0.74      0.75       198
+
+
+
+RUN at Thu Jul  8 12:35:09 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[604  45]
+ [ 19 123]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.97      0.93      0.95       649
+           1       0.73      0.87      0.79       142
+
+    accuracy                           0.92       791
+   macro avg       0.85      0.90      0.87       791
+weighted avg       0.93      0.92      0.92       791
+
+
+
+Confusion matrix for subset test:
+[[136  30]
+ [ 22  10]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.86      0.82      0.84       166
+           1       0.25      0.31      0.28        32
+
+    accuracy                           0.74       198
+   macro avg       0.56      0.57      0.56       198
+weighted avg       0.76      0.74      0.75       198
+
+
+
+RUN at Thu Jul  8 12:35:49 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[604  45]
+ [ 19 123]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.97      0.93      0.95       649
+           1       0.73      0.87      0.79       142
+
+    accuracy                           0.92       791
+   macro avg       0.85      0.90      0.87       791
+weighted avg       0.93      0.92      0.92       791
+
+
+
+Confusion matrix for subset test:
+[[136  30]
+ [ 22  10]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.86      0.82      0.84       166
+           1       0.25      0.31      0.28        32
+
+    accuracy                           0.74       198
+   macro avg       0.56      0.57      0.56       198
+weighted avg       0.76      0.74      0.75       198
+
+
+
+RUN at Thu Jul  8 12:36:25 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[613  36]
+ [ 16 126]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.97      0.94      0.96       649
+           1       0.78      0.89      0.83       142
+
+    accuracy                           0.93       791
+   macro avg       0.88      0.92      0.89       791
+weighted avg       0.94      0.93      0.94       791
+
+
+
+Confusion matrix for subset test:
+[[134  32]
+ [ 18  14]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.88      0.81      0.84       166
+           1       0.30      0.44      0.36        32
+
+    accuracy                           0.75       198
+   macro avg       0.59      0.62      0.60       198
+weighted avg       0.79      0.75      0.76       198
+
+
+
+RUN at Thu Jul  8 12:37:03 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[600  49]
+ [ 24 118]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.96      0.92      0.94       649
+           1       0.71      0.83      0.76       142
+
+    accuracy                           0.91       791
+   macro avg       0.83      0.88      0.85       791
+weighted avg       0.92      0.91      0.91       791
+
+
+
+Confusion matrix for subset test:
+[[135  31]
+ [ 23   9]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.85      0.81      0.83       166
+           1       0.23      0.28      0.25        32
+
+    accuracy                           0.73       198
+   macro avg       0.54      0.55      0.54       198
+weighted avg       0.75      0.73      0.74       198
+
+
+
+RUN at Thu Jul  8 12:37:45 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[604  45]
+ [ 19 123]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.97      0.93      0.95       649
+           1       0.73      0.87      0.79       142
+
+    accuracy                           0.92       791
+   macro avg       0.85      0.90      0.87       791
+weighted avg       0.93      0.92      0.92       791
+
+
+
+Confusion matrix for subset test:
+[[136  30]
+ [ 22  10]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.86      0.82      0.84       166
+           1       0.25      0.31      0.28        32
+
+    accuracy                           0.74       198
+   macro avg       0.56      0.57      0.56       198
+weighted avg       0.76      0.74      0.75       198
+
+
+
+RUN at Thu Jul  8 12:38:36 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[613  36]
+ [ 16 126]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.97      0.94      0.96       649
+           1       0.78      0.89      0.83       142
+
+    accuracy                           0.93       791
+   macro avg       0.88      0.92      0.89       791
+weighted avg       0.94      0.93      0.94       791
+
+
+
+Confusion matrix for subset test:
+[[134  32]
+ [ 18  14]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.88      0.81      0.84       166
+           1       0.30      0.44      0.36        32
+
+    accuracy                           0.75       198
+   macro avg       0.59      0.62      0.60       198
+weighted avg       0.79      0.75      0.76       198
+
+
+
+RUN at Thu Jul  8 12:39:21 2021 
+    using softmax as the activation for the output layer
+    trained during 30 epochs
+
+Confusion matrix for subset train:
+[[613  36]
+ [ 16 126]]
+
+Classification  report for subset train:
+              precision    recall  f1-score   support
+
+           0       0.97      0.94      0.96       649
+           1       0.78      0.89      0.83       142
+
+    accuracy                           0.93       791
+   macro avg       0.88      0.92      0.89       791
+weighted avg       0.94      0.93      0.94       791
+
+
+
+Confusion matrix for subset test:
+[[134  32]
+ [ 18  14]]
+
+Classification  report for subset test:
+              precision    recall  f1-score   support
+
+           0       0.88      0.81      0.84       166
+           1       0.30      0.44      0.36        32
+
+    accuracy                           0.75       198
+   macro avg       0.59      0.62      0.60       198
+weighted avg       0.79      0.75      0.76       198
+
+

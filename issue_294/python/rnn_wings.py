@@ -26,7 +26,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 if __name__ == '__main__':
     # Default settings
-    epochs = 10
+    epochs = 30
     batch_size = 10
     use_cpu = False
     output_softmax = True
@@ -64,11 +64,19 @@ if __name__ == '__main__':
 
         _layer_ = eddl.GRU(_layer_, 256)
         #_layer_ = eddl.LSTM(_layer_, 256)
-        _layer_ = eddl.BatchNormalization(_layer_, True)
+        _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
         _layer_ = eddl.ReLu(_layer_)
+        '''
+        input_layer = eddl.Input([7, 26])
+        _layer_ = eddl.Flatten(input_layer)
         _layer_ = eddl.Dense(_layer_, 256)
-        _layer_ = eddl.BatchNormalization(_layer_, True)
         _layer_ = eddl.ReLu(_layer_)
+        '''
+
+        _layer_ = eddl.Dense(_layer_, 256)
+        _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
+        _layer_ = eddl.ReLu(_layer_)
+
 
         if output_softmax:
             _layer_ = eddl.Dense(_layer_, num_classes)
@@ -88,11 +96,14 @@ if __name__ == '__main__':
     #optimizer = eddl.rmspropo(1.0e-3)
     optimizer = eddl.adam(1.0e-3)
 
-    losses = ["softmax_cross_entropy"] if output_softmax else ["mse"]
+    losses = ["softmax_cross_entropy"] if output_softmax else ["binary_cross_entropy"]
     metrics = ["categorical_accuracy"] if output_softmax else ["binary_accuracy"]
 
     # Build model
     eddl.build(net, optimizer, losses, metrics, cs = cs, init_weights = init_weights)
+
+    if not os.path.exists(filename):
+        eddl.save_net_to_onnx_file(net, filename)
 
     # View model
     eddl.summary(net);
@@ -117,6 +128,18 @@ if __name__ == '__main__':
     X = data['X']
     y = data['y']
 
+    # Uncomment the following lines to generate synthetic samples for
+    # a sanity check of the models.
+    # Syntetic data must runs OK
+    #
+    '''
+    for i in range(len(X)):
+        if y[i] == 0:
+            X[i, :, :] = 10 + numpy.random.randn(X.shape[1], X.shape[2]) * 3
+        else:
+            X[i, :, :] = -3 + numpy.random.randn(X.shape[1], X.shape[2]) * 10
+
+    '''
     X_train_np, X_test_np, y_train_np, y_test_np = train_test_split(X, y, test_size = 0.20, random_state = 0)
     #Y_train = to_categorical(y_train_np)
     #Y_test = to_categorical(y_test_np)
@@ -189,7 +212,7 @@ if __name__ == '__main__':
         cm_list[name] = (y_true, y_pred)
     #
 
-    log_file = open('report-python.log', 'at')
+    log_file = open('report-pyeddl.log', 'at')
     log_file.write(f'\nRUN at {time.asctime()} \n')
     log_file.write('    using ')
     log_file.write('softmax' if output_softmax else 'sigmoid')
@@ -205,4 +228,4 @@ if __name__ == '__main__':
         log_file.write('\n\n')
     log_file.close()
 
-    os.system("tail -n 36 report-python.log")
+    os.system("tail -n 36 report-pyeddl.log")
