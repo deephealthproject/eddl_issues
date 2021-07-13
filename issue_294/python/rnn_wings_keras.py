@@ -17,7 +17,7 @@ from tensorflow.keras.constraints import max_norm
 from tensorflow.keras.utils import to_categorical
 
 output_softmax = True # manually set
-epochs = 50 # manually set
+epochs = 20 # manually set
 
 
 f = open('data/data.pckl', 'rb')
@@ -56,7 +56,7 @@ optimizer = Adam(learning_rate = 1.0e-3)
 model.compile(loss = 'categorical_crossentropy', optimizer = optimizer, metrics = ['accuracy'])
 model.summary()
 
-model.fit(X_train, Y_train, batch_size = 10, epochs = epochs, shuffle = True, verbose = 1, validation_data = (X_test, Y_test))
+model.fit(X_train, Y_train, batch_size = 50, epochs = epochs, shuffle = True, verbose = 1, validation_data = (X_test, Y_test))
 
 score = model.evaluate(X_test, Y_test, verbose = 0)
 print(score)

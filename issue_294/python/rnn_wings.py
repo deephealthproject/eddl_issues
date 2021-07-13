@@ -26,8 +26,8 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 if __name__ == '__main__':
     # Default settings
-    epochs = 30
-    batch_size = 10
+    epochs = 20
+    batch_size = 50
     use_cpu = False
     output_softmax = True
 
@@ -64,7 +64,6 @@ if __name__ == '__main__':
 
         _layer_ = eddl.GRU(_layer_, 256)
         #_layer_ = eddl.LSTM(_layer_, 256)
-        #_layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
         _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.990)
         _layer_ = eddl.ReLu(_layer_)
         '''
@@ -75,7 +74,6 @@ if __name__ == '__main__':
         '''
 
         _layer_ = eddl.Dense(_layer_, 256)
-        #_layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.0)
         _layer_ = eddl.BatchNormalization(_layer_, affine = True, momentum = 0.990)
         _layer_ = eddl.ReLu(_layer_)
 

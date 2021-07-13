@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 {
     // Default settings
     int epochs = 50;
-    int batch_size = 10;
+    int batch_size = 100;
     bool use_cpu = false;
     bool output_softmax = true;
     bool debug = false;
