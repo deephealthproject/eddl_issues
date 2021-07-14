@@ -27,14 +27,22 @@ Findings:
 
 - Differences when using same initial weights in several runs:
     - CPU using optimizer SGD: no differences **Solved**
+    - CPU using optimizer RMSProp: insignificant differences **Solved**
     - CPU using optimizer Adam: insignificant differences **Solved**
     - CPU using optimzier SGD and loading initial weights from ONNX:  insignificant differences **Solved**
+    - CPU using optimzier RMSProp and loading initial weights from ONNX:  insignificant differences **Solved**
     - CPU using optimzier Adam and loading initial weights from ONNX:  insignificant differences **Solved**
 
     - GPU using optimizer SGD: differences to be studied **Pending**
+    - GPU using optimizer RMSProp: differences to be studied **Pending**
     - GPU using optimizer Adam: differences to be studied **Pending**
     - GPU using optimzier SGD and loading initial weights from ONNX:  differences to be studied **Pending**
+    - GPU using optimzier RMSProp and loading initial weights from ONNX:  differences to be studied **Pending**
     - GPU using optimzier Adam and loading initial weights from ONNX:  differences to be studied **Pending**
+
+
+Adam and RMSprop use element-wise divisions that raise to differences due to lack of precision in some computations.
+Increasing the parameter epsilon, whose default value is 1.0e-8, to 1.0e-2 the differences are hardly attenuated at the cost of delaying the convergence to the desired accuracy.
 
 
 - Fixed bug in BatchNormalization:

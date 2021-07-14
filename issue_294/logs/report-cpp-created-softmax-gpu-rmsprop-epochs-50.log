@@ -1,13 +1,13 @@
 
 
-RUN at Tue Jul 13 21:17:13 2021
+RUN at Wed Jul 14 14:20:53 2021
     using softmax as the activation for the output layer
     trained during 50 epochs
 ---------------------------------------
-         0         1         accuracy = 0.97092289
+         0         1         accuracy = 0.95322376
 ---------------------------------------
-0      647         2   TN, FP
-1       21       121   FN, TP
+0      644         5   TN, FP
+1       32       110   FN, TP
 ---------------------------------------
        649       142   N,  P  (total)
 ---------------------------------------
@@ -15,14 +15,14 @@ RUN at Tue Jul 13 21:17:13 2021
 
 
 
-RUN at Tue Jul 13 21:17:13 2021
+RUN at Wed Jul 14 14:20:53 2021
     using softmax as the activation for the output layer
     trained during 50 epochs
 ---------------------------------------
-         0         1         accuracy = 0.81818181
+         0         1         accuracy = 0.83333331
 ---------------------------------------
-0      151        15   TN, FP
-1       21        11   FN, TP
+0      157         9   TN, FP
+1       24         8   FN, TP
 ---------------------------------------
        166        32   N,  P  (total)
 ---------------------------------------

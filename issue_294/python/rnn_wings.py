@@ -26,7 +26,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 if __name__ == '__main__':
     # Default settings
-    epochs = 20
+    epochs = 50
     batch_size = 50
     use_cpu = False
     output_softmax = True
@@ -221,7 +221,10 @@ if __name__ == '__main__':
     for key, (y_true, y_pred) in cm_list.items():
         log_file.write('\n')
         log_file.write(f'Confusion matrix for subset {key}:\n')
-        log_file.write(str(confusion_matrix(y_true, y_pred, labels = [0, 1])))
+        #log_file.write(str(confusion_matrix(y_true, y_pred, labels = [0, 1])))
+        cm = confusion_matrix(y_true, y_pred, labels = [0, 1])
+        log_file.write("%d %d\n" % (cm[0][0], cm[0][1]))
+        log_file.write("%d %d\n" % (cm[1][0], cm[1][1]))
         log_file.write('\n\n')
         log_file.write(f'Classification  report for subset {key}:\n')
         log_file.write(classification_report(y_true, y_pred))

@@ -30,15 +30,37 @@ if __name__ == '__main__':
         for ci in counter_ids:
             counters[s][ci] = list()
     #
+    '''
+    states:
+        0 -> nothing
+        1 -> next line contains TN and FP
+        2 -> next line contains FN and TP
+    '''
+    state = 0
+    #
     for filename in filenames:
         f = open(filename, 'rt')
         subset = subsets[0]
         for line in f:
             if len(line) > 1:
                 tokens = line.split()
+                #Confusion matrix for subset train:
+                #647 2
+                #79 63
+                if tokens[0] == 'Confusion' and tokens[1] == 'matrix':
+                    state = 1
+                elif state == 1:
+                    counters[subset]['TN'].append(int(tokens[0]))
+                    counters[subset]['FP'].append(int(tokens[1]))
+                    state = 2
+                elif state == 2:
+                    counters[subset]['FN'].append(int(tokens[0]))
+                    counters[subset]['TP'].append(int(tokens[1]))
+                    subset = subsets[1] if subset == subsets[0] else subsets[0]
+                    state = 0
                 #0      645         4   TN, FP
                 #1       15       127   FN, TP
-                if tokens[0] == '0' and tokens[3] == 'TN,' and tokens[4] == 'FP':
+                elif tokens[0] == '0' and tokens[3] == 'TN,' and tokens[4] == 'FP':
                     counters[subset]['TN'].append(int(tokens[1]))
                     counters[subset]['FP'].append(int(tokens[2]))
                 elif tokens[0] == '1' and tokens[3] == 'FN,' and tokens[4] == 'TP':
@@ -77,6 +99,8 @@ if __name__ == '__main__':
             mean = d[ci].mean()
             sigma = d[ci].std()
             z[i * l : (i + 1) * l, j * l : (j + 1) * l, :] = jet(sigma / 4)[:3]
+        z[:, l, :] = (1.0, 1.0, 1.0)
+        z[l, :, :] = (1.0, 1.0, 1.0)
         im = axis.imshow(z)
         axis.set_yticks([])
         axis.set_xticks([])

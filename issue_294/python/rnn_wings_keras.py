@@ -17,7 +17,7 @@ from tensorflow.keras.constraints import max_norm
 from tensorflow.keras.utils import to_categorical
 
 output_softmax = True # manually set
-epochs = 20 # manually set
+epochs = 50 # manually set
 
 
 f = open('data/data.pckl', 'rb')
@@ -82,7 +82,10 @@ log_file.write(f'    trained during {epochs} epochs\n')
 for key, (y_true, y_pred) in cm_list.items():
     log_file.write('\n')
     log_file.write(f'Confusion matrix for subset {key}:\n')
-    log_file.write(str(confusion_matrix(y_true, y_pred, labels = [0, 1])))
+    #log_file.write(str(confusion_matrix(y_true, y_pred, labels = [0, 1])))
+    cm = confusion_matrix(y_true, y_pred, labels = [0, 1])
+    log_file.write("%d %d\n" % (cm[0][0], cm[0][1]))
+    log_file.write("%d %d\n" % (cm[1][0], cm[1][1]))
     log_file.write('\n\n')
     log_file.write(f'Classification  report for subset {key}:\n')
     log_file.write(classification_report(y_true, y_pred))

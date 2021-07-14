@@ -1,13 +1,13 @@
 
 
-RUN at Tue Jul 13 21:22:09 2021
+RUN at Wed Jul 14 14:26:14 2021
     using sigmoid as the activation for the output layer
     trained during 50 epochs
 ---------------------------------------
-         0         1         accuracy = 0.97597975
+         0         1         accuracy = 0.94310999
 ---------------------------------------
 0      645         4   TN, FP
-1       15       127   FN, TP
+1       41       101   FN, TP
 ---------------------------------------
        649       142   N,  P  (total)
 ---------------------------------------
@@ -15,14 +15,14 @@ RUN at Tue Jul 13 21:22:09 2021
 
 
 
-RUN at Tue Jul 13 21:22:09 2021
+RUN at Wed Jul 14 14:26:14 2021
     using sigmoid as the activation for the output layer
     trained during 50 epochs
 ---------------------------------------
-         0         1         accuracy = 0.81818181
+         0         1         accuracy = 0.80808079
 ---------------------------------------
-0      154        12   TN, FP
-1       24         8   FN, TP
+0      157         9   TN, FP
+1       29         3   FN, TP
 ---------------------------------------
        166        32   N,  P  (total)
 ---------------------------------------

@@ -102,11 +102,11 @@ int main(int argc, char **argv)
 
     optimizer opt = nullptr;
     if (optimizer_type == "adam")
-        opt = adam(1.0e-3);
+        opt = adam(1.0e-3, 0.9f, 0.999f, 1.0e-3f); // lr = 1.0e-3, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1.0e-3
     else if (optimizer_type == "sgd")
         opt = sgd(1.0e-3);
     else if (optimizer_type == "rmsprop")
-        opt = rmsprop(1.0e-3);
+        opt = rmsprop(1.0e-3, 0.9f, 1.0e-3f); // lr = 1.0e-3, rho = 0.9, epsilon = 1.0e-3
     else
         msg("optimizer not recognized");
 
