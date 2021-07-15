@@ -86,3 +86,13 @@ Relevant differences when using optimizer *Adam* with default value of *epsilon*
 <img src="figures/confusion-matrix-keras-softmax-cuDNN-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-pyeddl-softmax-cuDNN-adam-epochs-50.png" width="40%">
 </p>
+
+### Conclusions
+
+- The observed behaviour is normal when using the very challenging dataset provided by Wings.
+- The problem can be mitigated thanks to the *epsilon* parameter to avoid divisions by too small values.
+- Using _BatchNormalization_ requires a minimum *batch_size*, preferable greater than 30, and
+  a minimum of epochs depending on the dataset. In non-challenging datasets we do not need to
+  worry about the number epochs, it can be just the one required to get the best results in
+  the validation subset.
+- Other toolkits have a similar behaviour.
