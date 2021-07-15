@@ -43,11 +43,16 @@ Another important detail to consider is to run a minimum of epochs to ensure the
 computed in _BatchNormalization_ layers is representative, all the results presented here each run lasted for 50 epochs.
 
 
-## Next figures provide an overview of the differences found for all the configurations tested.
+## Next figures provide an overview of the differences found for all the configurations tested
+
+### Results obtained by running:
+- [scripts/run-rnn-wings-extended.sh](scripts/run-rnn-wings-extended.sh)
+- [scripts/results-visualisation.sh](scripts/results-visualisation.sh)
+
 
 <p style="text-align: center;">
 No differences when using optimizer *SGD*
-
+<br>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-sgd-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-sgd-epochs-50.png" width="40%">
 <br/>
@@ -57,7 +62,7 @@ No differences when using optimizer *SGD*
 
 <p style="text-align: center;">
 Insignificant differences when using optimizer *RMSprop* with *epsilon* set to 1.e-3
-
+<br/>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-rmsprop-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-rmsprop-epochs-50.png" width="40%">
 <br/>
@@ -67,7 +72,7 @@ Insignificant differences when using optimizer *RMSprop* with *epsilon* set to 1
 
 <p style="text-align: center;">
 Insignificant differences when using optimizer *Adam* with *epsilon* set to 1.e-3
-
+<br>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-sigmoid-gpu-adam-epochs-50.png" width="40%">
 <br/>
@@ -75,9 +80,13 @@ Insignificant differences when using optimizer *Adam* with *epsilon* set to 1.e-
 <img src="figures/confusion-matrix-eddl-softmax-gpu-adam-epochs-50.png" width="40%">
 </p>
 
+### Results obtained by running:
+- [scripts/run-python-experiments.sh](scripts/run-python-experiments.sh)
+- [scripts/python-results-visualisation.sh](scripts/python-results-visualisation.sh)
+
 <p style="text-align: center;">
 Relevant differences when using optimizer *Adam* with default value of *epsilon* in Keras and pyeddl-cuDNN
-
+<br>
 <img src="figures/confusion-matrix-keras-softmax-cuDNN-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-pyeddl-softmax-cuDNN-adam-epochs-50.png" width="40%">
 </p>
