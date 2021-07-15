@@ -53,3 +53,33 @@ Increasing the parameter epsilon, whose default value is 1.0e-8, to 1.0e-2 the d
 - BatchNormalization ONNX import/export:
     - to review the 'n-parameters', only shape[1] is used
     - do we have to accept values for momentum not in the range [0.9, 0.9999] ?
+
+
+<p style="text-align: center;">
+<img src="figures/confusion-matrix-eddl-sigmoid-cpu-sgd-epochs-50.png" width="40%">
+<img src="figures/confusion-matrix-eddl-softmax-cpu-sgd-epochs-50.png" width="40%">
+<br/>
+<img src="figures/confusion-matrix-eddl-sigmoid-gpu-sgd-epochs-50.png" width="40%">
+<img src="figures/confusion-matrix-eddl-softmax-gpu-sgd-epochs-50.png" width="40%">
+</p>
+
+<p style="text-align: center;">
+<img src="figures/confusion-matrix-eddl-sigmoid-cpu-rmsprop-epochs-50.png" width="40%">
+<img src="figures/confusion-matrix-eddl-softmax-cpu-rmsprop-epochs-50.png" width="40%">
+<br/>
+<img src="figures/confusion-matrix-eddl-sigmoid-gpu-rmsprop-epochs-50.png" width="40%">
+<img src="figures/confusion-matrix-eddl-softmax-gpu-rmsprop-epochs-50.png" width="40%">
+</p>
+
+<p style="text-align: center;">
+<img src="figures/confusion-matrix-eddl-sigmoid-cpu-adam-epochs-50.png" width="40%">
+<img src="figures/confusion-matrix-eddl-sigmoid-gpu-adam-epochs-50.png" width="40%">
+<br/>
+<img src="figures/confusion-matrix-eddl-softmax-cpu-adam-epochs-50.png" width="40%">
+<img src="figures/confusion-matrix-eddl-softmax-gpu-adam-epochs-50.png" width="40%">
+</p>
+
+<p style="text-align: center;">
+<img src="figures/confusion-matrix-keras-softmax-cuDNN-adam-epochs-50.png" width="40%">
+<img src="figures/confusion-matrix-pyeddl-softmax-cuDNN-adam-epochs-50.png" width="40%">
+</p>
