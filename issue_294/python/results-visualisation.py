@@ -13,12 +13,15 @@ if __name__ == '__main__':
     #
     title = 'not specified'
     filenames = list()
+    to_png = False
     #
     i = 1
     while i < len(sys.argv):
         if sys.argv[i] == '--title':
             title = sys.argv[i + 1]
             i += 1
+        elif sys.argv[i] == '--to-png':
+            to_png = True
         else:
             filenames.append(sys.argv[i])
         i += 1
@@ -83,7 +86,7 @@ if __name__ == '__main__':
              'fontsize': 10.0,
              'color': 'white'}
     #
-    fig, axes = pyplot.subplots(nrows = 1, ncols = len(subsets))
+    fig, axes = pyplot.subplots(nrows = 1, ncols = len(subsets), facecolor = '#dddddd')
     l = 50
     jet = cm.get_cmap('jet', 100)
     for s in range(len(subsets)):
@@ -133,4 +136,27 @@ if __name__ == '__main__':
     cbar.set_ticks([])
     fig.suptitle(title)
     #pyplot.tight_layout()
-    pyplot.show()
+    if to_png:
+        os.makedirs('figures', exist_ok = True)
+        # report-cpp-created-softmax-cpu-rmsprop-epochs-50
+        tokens = os.path.basename(filenames[0]).split(sep = '-')
+        if tokens[1] == 'cpp':
+            output_type = tokens[3]
+            device = tokens[4]
+            optimizer_type = tokens[5]
+            engine = 'eddl'
+        elif tokens[1] == 'keras':
+            output_type = 'softmax'
+            device = 'cuDNN'
+            optimizer_type = 'adam'
+            engine = 'keras'
+        elif tokens[1] == 'pyeddl':
+            output_type = 'softmax'
+            device = 'cuDNN'
+            optimizer_type = 'adam'
+            engine = 'pyeddl'
+        #
+        filename = f'figures/confusion-matrix-{engine}-{output_type}-{device}-{optimizer_type}-epochs-50.png' 
+        pyplot.savefig(filename)
+    else:
+        pyplot.show()
