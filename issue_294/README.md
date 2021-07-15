@@ -50,8 +50,8 @@ computed in _BatchNormalization_ layers is representative, all the results prese
 - [scripts/results-visualisation.sh](scripts/results-visualisation.sh)
 
 
-<p style="text-align: center;">
 No differences when using optimizer *SGD*
+<p style="text-align: center;">
 <br>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-sgd-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-sgd-epochs-50.png" width="40%">
@@ -60,8 +60,8 @@ No differences when using optimizer *SGD*
 <img src="figures/confusion-matrix-eddl-softmax-gpu-sgd-epochs-50.png" width="40%">
 </p>
 
-<p style="text-align: center;">
 Insignificant differences when using optimizer *RMSprop* with *epsilon* set to 1.e-3
+<p style="text-align: center;">
 <br/>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-rmsprop-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-rmsprop-epochs-50.png" width="40%">
@@ -70,8 +70,8 @@ Insignificant differences when using optimizer *RMSprop* with *epsilon* set to 1
 <img src="figures/confusion-matrix-eddl-softmax-gpu-rmsprop-epochs-50.png" width="40%">
 </p>
 
-<p style="text-align: center;">
 Insignificant differences when using optimizer *Adam* with *epsilon* set to 1.e-3
+<p style="text-align: center;">
 <br>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-sigmoid-gpu-adam-epochs-50.png" width="40%">
@@ -84,8 +84,8 @@ Insignificant differences when using optimizer *Adam* with *epsilon* set to 1.e-
 - [scripts/run-python-experiments.sh](scripts/run-python-experiments.sh)
 - [scripts/python-results-visualisation.sh](scripts/python-results-visualisation.sh)
 
-<p style="text-align: center;">
 Relevant differences when using optimizer *Adam* with default value of *epsilon* in Keras and pyeddl-cuDNN
+<p style="text-align: center;">
 <br>
 <img src="figures/confusion-matrix-keras-softmax-cuDNN-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-pyeddl-softmax-cuDNN-adam-epochs-50.png" width="40%">
