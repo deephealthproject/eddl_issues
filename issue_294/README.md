@@ -52,7 +52,6 @@ computed in _BatchNormalization_ layers is representative, all the results prese
 
 No differences when using optimizer *SGD*
 <p style="text-align: center;">
-<br>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-sgd-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-sgd-epochs-50.png" width="40%">
 <br/>
@@ -62,7 +61,6 @@ No differences when using optimizer *SGD*
 
 Insignificant differences when using optimizer *RMSprop* with *epsilon* set to 1.e-3
 <p style="text-align: center;">
-<br/>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-rmsprop-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-rmsprop-epochs-50.png" width="40%">
 <br/>
@@ -72,7 +70,6 @@ Insignificant differences when using optimizer *RMSprop* with *epsilon* set to 1
 
 Insignificant differences when using optimizer *Adam* with *epsilon* set to 1.e-3
 <p style="text-align: center;">
-<br>
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-sigmoid-gpu-adam-epochs-50.png" width="40%">
 <br/>
@@ -86,7 +83,6 @@ Insignificant differences when using optimizer *Adam* with *epsilon* set to 1.e-
 
 Relevant differences when using optimizer *Adam* with default value of *epsilon* in Keras and pyeddl-cuDNN
 <p style="text-align: center;">
-<br>
 <img src="figures/confusion-matrix-keras-softmax-cuDNN-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-pyeddl-softmax-cuDNN-adam-epochs-50.png" width="40%">
 </p>
