@@ -4,11 +4,12 @@ Different results of recurrent GRU network during different executions [Issue 29
 
 Here you can find C++ and Python code used to check the issue.
 We were not able to reproduce the behaviour reported.
-The files [report-cpp.log](report-cpp.log) and [report-python.log](report-python.log)
-contain the result of different runs with the C++ and Python code.
+The different report files at [logs](logs) contain the result
+of different runs with the C++ and Python code.
+Additionally, the same topology has been tested using TensorFlow+Keras.
 
 *C++* version was checked with the develop branch at 2020-07-01.
-*Python* version was checked with _pyeddl_ and _eddl_ version 1.0
+*Python* version was checked with _pyeddl_ version 1.0.0 and _eddl_ version 1.0.92a
 
 
 This folder also contains:
@@ -22,40 +23,31 @@ This folder also contains:
 
 Findings:
 
-- Discrepancies using GRU between *pyeddl-cuDNN* and *Keras*:
-    - **Solved**: similar behaviour using both toolkits with the same initial network weights
+- Discrepancies using GRU in the results obtained with *eddl*, *pyeddl-cuDNN* and *Keras*.
 
-- Differences when using same initial weights in several runs:
-    - CPU using optimizer SGD: no differences **Solved**
-    - CPU using optimizer RMSProp: insignificant differences **Solved**
-    - CPU using optimizer Adam: insignificant differences **Solved**
-    - CPU using optimzier SGD and loading initial weights from ONNX:  insignificant differences **Solved**
-    - CPU using optimzier RMSProp and loading initial weights from ONNX:  insignificant differences **Solved**
-    - CPU using optimzier Adam and loading initial weights from ONNX:  insignificant differences **Solved**
+These discrepancies are normal depending on the optimizer used.
+_Adam_ and _RMSprop_ optimizers use element-wise divisions that raise to differences due to lack of precision in some computations.
+This can be seen in the following results presented in confusion matrix plots, one per tested configuration.
 
-    - GPU using optimizer SGD: differences to be studied **Pending**
-    - GPU using optimizer RMSProp: differences to be studied **Pending**
-    - GPU using optimizer Adam: differences to be studied **Pending**
-    - GPU using optimzier SGD and loading initial weights from ONNX:  differences to be studied **Pending**
-    - GPU using optimzier RMSProp and loading initial weights from ONNX:  differences to be studied **Pending**
-    - GPU using optimzier Adam and loading initial weights from ONNX:  differences to be studied **Pending**
+In order to mitigate the effect, we increased the parameter _epsilon_ of the optimizers whose default value is 1.0e-8.
+The value used in all the experiments using the C++ version was 1.0e-3, the differences are attenuated at the cost of delaying the convergence to the desired accuracy.
 
 
-Adam and RMSprop use element-wise divisions that raise to differences due to lack of precision in some computations.
-Increasing the parameter epsilon, whose default value is 1.0e-8, to 1.0e-2 the differences are hardly attenuated at the cost of delaying the convergence to the desired accuracy.
+- All the plots have been obtained by creating a new net from scratch per configuration, and then repeating
+  10 runs with the same weight initialization. In total 11 runs per configuration.
+
+- Concerning the use of _BatchNormalization_, the behaviour observed is correct.
+However, in order to avoid too much differences when using _BatchNormalization_
+it is important to use a *batch_size* larger than 30 samples, in all the experiments presented here it was 50.
+Another important detail to consider is to run a minimum of epochs to ensure the global mean and variance 
+computed in _BatchNormalization_ layers is representative, all the results presented here each run lasted for 50 epochs.
 
 
-- Fixed bug in BatchNormalization:
-    - to explain in the code
-    - to review which version of forward and backward to use for GPU with CUDA. CPU and cuDNN are clear
-
-
-- BatchNormalization ONNX import/export:
-    - to review the 'n-parameters', only shape[1] is used
-    - do we have to accept values for momentum not in the range [0.9, 0.9999] ?
-
+## Next figures provide an overview of the differences found for all the configurations tested.
 
 <p style="text-align: center;">
+No differences when using optimizer *SGD*
+
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-sgd-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-sgd-epochs-50.png" width="40%">
 <br/>
@@ -64,6 +56,8 @@ Increasing the parameter epsilon, whose default value is 1.0e-8, to 1.0e-2 the d
 </p>
 
 <p style="text-align: center;">
+Insignificant differences when using optimizer *RMSprop* with *epsilon* set to 1.e-3
+
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-rmsprop-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-softmax-cpu-rmsprop-epochs-50.png" width="40%">
 <br/>
@@ -72,6 +66,8 @@ Increasing the parameter epsilon, whose default value is 1.0e-8, to 1.0e-2 the d
 </p>
 
 <p style="text-align: center;">
+Insignificant differences when using optimizer *Adam* with *epsilon* set to 1.e-3
+
 <img src="figures/confusion-matrix-eddl-sigmoid-cpu-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-eddl-sigmoid-gpu-adam-epochs-50.png" width="40%">
 <br/>
@@ -80,6 +76,8 @@ Increasing the parameter epsilon, whose default value is 1.0e-8, to 1.0e-2 the d
 </p>
 
 <p style="text-align: center;">
+Relevant differences when using optimizer *Adam* with default value of *epsilon* in Keras and pyeddl-cuDNN
+
 <img src="figures/confusion-matrix-keras-softmax-cuDNN-adam-epochs-50.png" width="40%">
 <img src="figures/confusion-matrix-pyeddl-softmax-cuDNN-adam-epochs-50.png" width="40%">
 </p>
