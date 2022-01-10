@@ -1,0 +1,290 @@
+Files already downloaded and verified
+/home/chavicoski/anaconda3/envs/onnx/lib/python3.8/site-packages/torch/onnx/utils.py:46: UserWarning: You are exporting the model to ONNX while in training mode with 'train' parameter not specified. The model will default to inference mode export. If you wish to export a training amenable ONNX model, specify training=TrainingMode.TRAINING or training=TrainingMode.PRESERVE (to preserve the original model state) in torch.onnx.export().
+  warnings.warn("You are exporting the model to ONNX while in training mode with "
+/home/chavicoski/anaconda3/envs/onnx/lib/python3.8/site-packages/torch/nn/functional.py:718: UserWarning: Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /opt/conda/conda-bld/pytorch_1623448278899/work/c10/core/TensorImpl.h:1156.)
+  return torch.max_pool2d(input, kernel_size, stride, padding, dilation, ceil_mode)
+Train Epoch: 1 [0/50000 (0%)]	Loss: 2.302972	Acc: 15.00%
+Train Epoch: 1 [1000/50000 (2%)]	Loss: 2.302313	Acc: 11.64%
+Train Epoch: 1 [2000/50000 (4%)]	Loss: 2.302690	Acc: 11.71%
+Train Epoch: 1 [3000/50000 (6%)]	Loss: 2.301076	Acc: 13.48%
+Train Epoch: 1 [4000/50000 (8%)]	Loss: 2.289374	Acc: 14.27%
+Train Epoch: 1 [5000/50000 (10%)]	Loss: 2.256349	Acc: 14.84%
+Train Epoch: 1 [6000/50000 (12%)]	Loss: 2.271167	Acc: 15.08%
+Train Epoch: 1 [7000/50000 (14%)]	Loss: 2.225850	Acc: 15.45%
+Train Epoch: 1 [8000/50000 (16%)]	Loss: 2.224655	Acc: 15.95%
+Train Epoch: 1 [9000/50000 (18%)]	Loss: 2.249675	Acc: 16.07%
+Train Epoch: 1 [10000/50000 (20%)]	Loss: 2.206800	Acc: 16.56%
+Train Epoch: 1 [11000/50000 (22%)]	Loss: 2.217190	Acc: 16.81%
+Train Epoch: 1 [12000/50000 (24%)]	Loss: 2.213968	Acc: 16.98%
+Train Epoch: 1 [13000/50000 (26%)]	Loss: 2.220181	Acc: 17.31%
+Train Epoch: 1 [14000/50000 (28%)]	Loss: 2.244053	Acc: 17.60%
+Train Epoch: 1 [15000/50000 (30%)]	Loss: 2.191134	Acc: 17.70%
+Train Epoch: 1 [16000/50000 (32%)]	Loss: 2.234092	Acc: 17.71%
+Train Epoch: 1 [17000/50000 (34%)]	Loss: 2.203664	Acc: 17.87%
+Train Epoch: 1 [18000/50000 (36%)]	Loss: 2.208081	Acc: 18.14%
+Train Epoch: 1 [19000/50000 (38%)]	Loss: 2.231246	Acc: 18.37%
+Train Epoch: 1 [20000/50000 (40%)]	Loss: 2.243546	Acc: 18.52%
+Train Epoch: 1 [21000/50000 (42%)]	Loss: 2.216704	Acc: 18.75%
+Train Epoch: 1 [22000/50000 (44%)]	Loss: 2.223892	Acc: 18.92%
+Train Epoch: 1 [23000/50000 (46%)]	Loss: 2.198395	Acc: 19.00%
+Train Epoch: 1 [24000/50000 (48%)]	Loss: 2.188685	Acc: 19.23%
+Train Epoch: 1 [25000/50000 (50%)]	Loss: 2.210248	Acc: 19.44%
+Train Epoch: 1 [26000/50000 (52%)]	Loss: 2.154618	Acc: 19.58%
+Train Epoch: 1 [27000/50000 (54%)]	Loss: 2.214931	Acc: 19.72%
+Train Epoch: 1 [28000/50000 (56%)]	Loss: 2.243688	Acc: 19.76%
+Train Epoch: 1 [29000/50000 (58%)]	Loss: 2.192077	Acc: 19.83%
+Train Epoch: 1 [30000/50000 (60%)]	Loss: 2.189254	Acc: 20.03%
+Train Epoch: 1 [31000/50000 (62%)]	Loss: 2.225682	Acc: 20.14%
+Train Epoch: 1 [32000/50000 (64%)]	Loss: 2.215342	Acc: 20.32%
+Train Epoch: 1 [33000/50000 (66%)]	Loss: 2.190622	Acc: 20.43%
+Train Epoch: 1 [34000/50000 (68%)]	Loss: 2.223573	Acc: 20.50%
+Train Epoch: 1 [35000/50000 (70%)]	Loss: 2.197083	Acc: 20.70%
+Train Epoch: 1 [36000/50000 (72%)]	Loss: 2.240385	Acc: 20.80%
+Train Epoch: 1 [37000/50000 (74%)]	Loss: 2.235587	Acc: 20.98%
+Train Epoch: 1 [38000/50000 (76%)]	Loss: 2.201180	Acc: 21.03%
+Train Epoch: 1 [39000/50000 (78%)]	Loss: 2.174634	Acc: 21.14%
+Train Epoch: 1 [40000/50000 (80%)]	Loss: 2.121673	Acc: 21.24%
+Train Epoch: 1 [41000/50000 (82%)]	Loss: 2.247724	Acc: 21.26%
+Train Epoch: 1 [42000/50000 (84%)]	Loss: 2.246806	Acc: 21.30%
+Train Epoch: 1 [43000/50000 (86%)]	Loss: 2.190535	Acc: 21.34%
+Train Epoch: 1 [44000/50000 (88%)]	Loss: 2.203394	Acc: 21.42%
+Train Epoch: 1 [45000/50000 (90%)]	Loss: 2.143149	Acc: 21.47%
+Train Epoch: 1 [46000/50000 (92%)]	Loss: 2.240723	Acc: 21.52%
+Train Epoch: 1 [47000/50000 (94%)]	Loss: 2.164673	Acc: 21.65%
+Train Epoch: 1 [48000/50000 (96%)]	Loss: 2.250244	Acc: 21.73%
+Train Epoch: 1 [49000/50000 (98%)]	Loss: 2.188843	Acc: 21.86%
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+
+Test set: Average loss: 2.1695, Accuracy: 2843/10000 (28%)
+
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+Train Epoch: 2 [0/50000 (0%)]	Loss: 2.179039	Acc: 30.00%
+Train Epoch: 2 [1000/50000 (2%)]	Loss: 2.153937	Acc: 28.36%
+Train Epoch: 2 [2000/50000 (4%)]	Loss: 2.222985	Acc: 28.33%
+Train Epoch: 2 [3000/50000 (6%)]	Loss: 2.159501	Acc: 28.32%
+Train Epoch: 2 [4000/50000 (8%)]	Loss: 2.172675	Acc: 28.68%
+Train Epoch: 2 [5000/50000 (10%)]	Loss: 2.163887	Acc: 28.78%
+Train Epoch: 2 [6000/50000 (12%)]	Loss: 2.155911	Acc: 28.56%
+Train Epoch: 2 [7000/50000 (14%)]	Loss: 2.152303	Acc: 28.24%
+Train Epoch: 2 [8000/50000 (16%)]	Loss: 2.147911	Acc: 28.05%
+Train Epoch: 2 [9000/50000 (18%)]	Loss: 2.184484	Acc: 28.01%
+Train Epoch: 2 [10000/50000 (20%)]	Loss: 2.132002	Acc: 28.20%
+Train Epoch: 2 [11000/50000 (22%)]	Loss: 2.170032	Acc: 28.52%
+Train Epoch: 2 [12000/50000 (24%)]	Loss: 2.176973	Acc: 28.37%
+Train Epoch: 2 [13000/50000 (26%)]	Loss: 2.173283	Acc: 28.50%
+Train Epoch: 2 [14000/50000 (28%)]	Loss: 2.139971	Acc: 28.69%
+Train Epoch: 2 [15000/50000 (30%)]	Loss: 2.191899	Acc: 28.58%
+Train Epoch: 2 [16000/50000 (32%)]	Loss: 2.138758	Acc: 28.57%
+Train Epoch: 2 [17000/50000 (34%)]	Loss: 2.137943	Acc: 28.49%
+Train Epoch: 2 [18000/50000 (36%)]	Loss: 2.118485	Acc: 28.58%
+Train Epoch: 2 [19000/50000 (38%)]	Loss: 2.173665	Acc: 28.63%
+Train Epoch: 2 [20000/50000 (40%)]	Loss: 2.166412	Acc: 28.68%
+Train Epoch: 2 [21000/50000 (42%)]	Loss: 2.165436	Acc: 28.77%
+Train Epoch: 2 [22000/50000 (44%)]	Loss: 2.171109	Acc: 28.95%
+Train Epoch: 2 [23000/50000 (46%)]	Loss: 2.148947	Acc: 29.00%
+Train Epoch: 2 [24000/50000 (48%)]	Loss: 2.147248	Acc: 29.10%
+Train Epoch: 2 [25000/50000 (50%)]	Loss: 2.119147	Acc: 29.26%
+Train Epoch: 2 [26000/50000 (52%)]	Loss: 2.104940	Acc: 29.33%
+Train Epoch: 2 [27000/50000 (54%)]	Loss: 2.138283	Acc: 29.35%
+Train Epoch: 2 [28000/50000 (56%)]	Loss: 2.206177	Acc: 29.40%
+Train Epoch: 2 [29000/50000 (58%)]	Loss: 2.148303	Acc: 29.48%
+Train Epoch: 2 [30000/50000 (60%)]	Loss: 2.109558	Acc: 29.58%
+Train Epoch: 2 [31000/50000 (62%)]	Loss: 2.175966	Acc: 29.62%
+Train Epoch: 2 [32000/50000 (64%)]	Loss: 2.122570	Acc: 29.80%
+Train Epoch: 2 [33000/50000 (66%)]	Loss: 2.163462	Acc: 29.83%
+Train Epoch: 2 [34000/50000 (68%)]	Loss: 2.150252	Acc: 29.90%
+Train Epoch: 2 [35000/50000 (70%)]	Loss: 2.076019	Acc: 30.09%
+Train Epoch: 2 [36000/50000 (72%)]	Loss: 2.164638	Acc: 30.14%
+Train Epoch: 2 [37000/50000 (74%)]	Loss: 2.134628	Acc: 30.23%
+Train Epoch: 2 [38000/50000 (76%)]	Loss: 2.171124	Acc: 30.30%
+Train Epoch: 2 [39000/50000 (78%)]	Loss: 2.074711	Acc: 30.42%
+Train Epoch: 2 [40000/50000 (80%)]	Loss: 2.080147	Acc: 30.48%
+Train Epoch: 2 [41000/50000 (82%)]	Loss: 2.200503	Acc: 30.51%
+Train Epoch: 2 [42000/50000 (84%)]	Loss: 2.158679	Acc: 30.61%
+Train Epoch: 2 [43000/50000 (86%)]	Loss: 2.060669	Acc: 30.70%
+Train Epoch: 2 [44000/50000 (88%)]	Loss: 2.135272	Acc: 30.77%
+Train Epoch: 2 [45000/50000 (90%)]	Loss: 2.037005	Acc: 30.86%
+Train Epoch: 2 [46000/50000 (92%)]	Loss: 2.191196	Acc: 30.84%
+Train Epoch: 2 [47000/50000 (94%)]	Loss: 2.114616	Acc: 30.92%
+Train Epoch: 2 [48000/50000 (96%)]	Loss: 2.215067	Acc: 30.95%
+Train Epoch: 2 [49000/50000 (98%)]	Loss: 2.144642	Acc: 31.01%
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+
+Test set: Average loss: 2.1122, Accuracy: 3462/10000 (35%)
+
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+Train Epoch: 3 [0/50000 (0%)]	Loss: 2.139616	Acc: 29.00%
+Train Epoch: 3 [1000/50000 (2%)]	Loss: 2.125444	Acc: 32.55%
+Train Epoch: 3 [2000/50000 (4%)]	Loss: 2.177091	Acc: 33.38%
+Train Epoch: 3 [3000/50000 (6%)]	Loss: 2.125834	Acc: 33.42%
+Train Epoch: 3 [4000/50000 (8%)]	Loss: 2.066458	Acc: 33.27%
+Train Epoch: 3 [5000/50000 (10%)]	Loss: 2.113410	Acc: 33.92%
+Train Epoch: 3 [6000/50000 (12%)]	Loss: 2.079761	Acc: 33.92%
+Train Epoch: 3 [7000/50000 (14%)]	Loss: 2.092908	Acc: 33.90%
+Train Epoch: 3 [8000/50000 (16%)]	Loss: 2.116487	Acc: 33.30%
+Train Epoch: 3 [9000/50000 (18%)]	Loss: 2.147059	Acc: 33.34%
+Train Epoch: 3 [10000/50000 (20%)]	Loss: 2.096988	Acc: 33.39%
+Train Epoch: 3 [11000/50000 (22%)]	Loss: 2.129128	Acc: 33.66%
+Train Epoch: 3 [12000/50000 (24%)]	Loss: 2.131642	Acc: 33.61%
+Train Epoch: 3 [13000/50000 (26%)]	Loss: 2.108398	Acc: 33.73%
+Train Epoch: 3 [14000/50000 (28%)]	Loss: 2.147982	Acc: 33.67%
+Train Epoch: 3 [15000/50000 (30%)]	Loss: 2.185633	Acc: 33.51%
+Train Epoch: 3 [16000/50000 (32%)]	Loss: 2.080678	Acc: 33.59%
+Train Epoch: 3 [17000/50000 (34%)]	Loss: 2.064160	Acc: 33.54%
+Train Epoch: 3 [18000/50000 (36%)]	Loss: 2.075553	Acc: 33.64%
+Train Epoch: 3 [19000/50000 (38%)]	Loss: 2.115184	Acc: 33.64%
+Train Epoch: 3 [20000/50000 (40%)]	Loss: 2.141099	Acc: 33.74%
+Train Epoch: 3 [21000/50000 (42%)]	Loss: 2.127324	Acc: 33.79%
+Train Epoch: 3 [22000/50000 (44%)]	Loss: 2.103360	Acc: 33.92%
+Train Epoch: 3 [23000/50000 (46%)]	Loss: 2.096151	Acc: 34.03%
+Train Epoch: 3 [24000/50000 (48%)]	Loss: 2.114352	Acc: 34.16%
+Train Epoch: 3 [25000/50000 (50%)]	Loss: 2.075634	Acc: 34.27%
+Train Epoch: 3 [26000/50000 (52%)]	Loss: 2.089535	Acc: 34.28%
+Train Epoch: 3 [27000/50000 (54%)]	Loss: 2.100603	Acc: 34.28%
+Train Epoch: 3 [28000/50000 (56%)]	Loss: 2.157307	Acc: 34.26%
+Train Epoch: 3 [29000/50000 (58%)]	Loss: 2.118277	Acc: 34.35%
+Train Epoch: 3 [30000/50000 (60%)]	Loss: 2.037156	Acc: 34.44%
+Train Epoch: 3 [31000/50000 (62%)]	Loss: 2.141615	Acc: 34.47%
+Train Epoch: 3 [32000/50000 (64%)]	Loss: 2.114063	Acc: 34.56%
+Train Epoch: 3 [33000/50000 (66%)]	Loss: 2.157685	Acc: 34.55%
+Train Epoch: 3 [34000/50000 (68%)]	Loss: 2.121972	Acc: 34.59%
+Train Epoch: 3 [35000/50000 (70%)]	Loss: 2.020799	Acc: 34.75%
+Train Epoch: 3 [36000/50000 (72%)]	Loss: 2.125311	Acc: 34.78%
+Train Epoch: 3 [37000/50000 (74%)]	Loss: 2.093750	Acc: 34.81%
+Train Epoch: 3 [38000/50000 (76%)]	Loss: 2.136043	Acc: 34.84%
+Train Epoch: 3 [39000/50000 (78%)]	Loss: 2.030595	Acc: 34.92%
+Train Epoch: 3 [40000/50000 (80%)]	Loss: 2.034071	Acc: 34.99%
+Train Epoch: 3 [41000/50000 (82%)]	Loss: 2.155961	Acc: 35.01%
+Train Epoch: 3 [42000/50000 (84%)]	Loss: 2.144650	Acc: 35.00%
+Train Epoch: 3 [43000/50000 (86%)]	Loss: 2.025455	Acc: 35.08%
+Train Epoch: 3 [44000/50000 (88%)]	Loss: 2.084472	Acc: 35.10%
+Train Epoch: 3 [45000/50000 (90%)]	Loss: 2.007050	Acc: 35.17%
+Train Epoch: 3 [46000/50000 (92%)]	Loss: 2.151967	Acc: 35.15%
+Train Epoch: 3 [47000/50000 (94%)]	Loss: 2.072755	Acc: 35.20%
+Train Epoch: 3 [48000/50000 (96%)]	Loss: 2.173273	Acc: 35.21%
+Train Epoch: 3 [49000/50000 (98%)]	Loss: 2.099542	Acc: 35.25%
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+
+Test set: Average loss: 2.0784, Accuracy: 3777/10000 (38%)
+
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+Train Epoch: 4 [0/50000 (0%)]	Loss: 2.107538	Acc: 37.00%
+Train Epoch: 4 [1000/50000 (2%)]	Loss: 2.075829	Acc: 38.09%
+Train Epoch: 4 [2000/50000 (4%)]	Loss: 2.119179	Acc: 38.29%
+Train Epoch: 4 [3000/50000 (6%)]	Loss: 2.106470	Acc: 37.71%
+Train Epoch: 4 [4000/50000 (8%)]	Loss: 2.012140	Acc: 37.41%
+Train Epoch: 4 [5000/50000 (10%)]	Loss: 2.101384	Acc: 37.57%
+Train Epoch: 4 [6000/50000 (12%)]	Loss: 2.052132	Acc: 37.51%
+Train Epoch: 4 [7000/50000 (14%)]	Loss: 2.097962	Acc: 37.17%
+Train Epoch: 4 [8000/50000 (16%)]	Loss: 2.078184	Acc: 36.95%
+Train Epoch: 4 [9000/50000 (18%)]	Loss: 2.118611	Acc: 36.89%
+Train Epoch: 4 [10000/50000 (20%)]	Loss: 2.070992	Acc: 36.88%
+Train Epoch: 4 [11000/50000 (22%)]	Loss: 2.101341	Acc: 36.81%
+Train Epoch: 4 [12000/50000 (24%)]	Loss: 2.095717	Acc: 36.70%
+Train Epoch: 4 [13000/50000 (26%)]	Loss: 2.060325	Acc: 36.80%
+Train Epoch: 4 [14000/50000 (28%)]	Loss: 2.119205	Acc: 36.82%
+Train Epoch: 4 [15000/50000 (30%)]	Loss: 2.139284	Acc: 36.72%
+Train Epoch: 4 [16000/50000 (32%)]	Loss: 2.067821	Acc: 36.67%
+Train Epoch: 4 [17000/50000 (34%)]	Loss: 2.028736	Acc: 36.65%
+Train Epoch: 4 [18000/50000 (36%)]	Loss: 2.066904	Acc: 36.71%
+Train Epoch: 4 [19000/50000 (38%)]	Loss: 2.112788	Acc: 36.73%
+Train Epoch: 4 [20000/50000 (40%)]	Loss: 2.114134	Acc: 36.82%
+Train Epoch: 4 [21000/50000 (42%)]	Loss: 2.084979	Acc: 36.88%
+Train Epoch: 4 [22000/50000 (44%)]	Loss: 2.079267	Acc: 36.96%
+Train Epoch: 4 [23000/50000 (46%)]	Loss: 2.036525	Acc: 37.11%
+Train Epoch: 4 [24000/50000 (48%)]	Loss: 2.101685	Acc: 37.25%
+Train Epoch: 4 [25000/50000 (50%)]	Loss: 2.046431	Acc: 37.35%
+Train Epoch: 4 [26000/50000 (52%)]	Loss: 2.019972	Acc: 37.43%
+Train Epoch: 4 [27000/50000 (54%)]	Loss: 2.084821	Acc: 37.45%
+Train Epoch: 4 [28000/50000 (56%)]	Loss: 2.124469	Acc: 37.44%
+Train Epoch: 4 [29000/50000 (58%)]	Loss: 2.094927	Acc: 37.48%
+Train Epoch: 4 [30000/50000 (60%)]	Loss: 2.000750	Acc: 37.55%
+Train Epoch: 4 [31000/50000 (62%)]	Loss: 2.098454	Acc: 37.55%
+Train Epoch: 4 [32000/50000 (64%)]	Loss: 2.075272	Acc: 37.64%
+Train Epoch: 4 [33000/50000 (66%)]	Loss: 2.144182	Acc: 37.61%
+Train Epoch: 4 [34000/50000 (68%)]	Loss: 2.101842	Acc: 37.58%
+Train Epoch: 4 [35000/50000 (70%)]	Loss: 2.012460	Acc: 37.69%
+Train Epoch: 4 [36000/50000 (72%)]	Loss: 2.074002	Acc: 37.70%
+Train Epoch: 4 [37000/50000 (74%)]	Loss: 2.070338	Acc: 37.72%
+Train Epoch: 4 [38000/50000 (76%)]	Loss: 2.123044	Acc: 37.70%
+Train Epoch: 4 [39000/50000 (78%)]	Loss: 2.016672	Acc: 37.74%
+Train Epoch: 4 [40000/50000 (80%)]	Loss: 2.013003	Acc: 37.77%
+Train Epoch: 4 [41000/50000 (82%)]	Loss: 2.136678	Acc: 37.77%
+Train Epoch: 4 [42000/50000 (84%)]	Loss: 2.137376	Acc: 37.75%
+Train Epoch: 4 [43000/50000 (86%)]	Loss: 1.996298	Acc: 37.78%
+Train Epoch: 4 [44000/50000 (88%)]	Loss: 2.047732	Acc: 37.81%
+Train Epoch: 4 [45000/50000 (90%)]	Loss: 1.995849	Acc: 37.82%
+Train Epoch: 4 [46000/50000 (92%)]	Loss: 2.112890	Acc: 37.82%
+Train Epoch: 4 [47000/50000 (94%)]	Loss: 2.098826	Acc: 37.83%
+Train Epoch: 4 [48000/50000 (96%)]	Loss: 2.134355	Acc: 37.79%
+Train Epoch: 4 [49000/50000 (98%)]	Loss: 2.069336	Acc: 37.80%
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+
+Test set: Average loss: 2.0578, Accuracy: 4011/10000 (40%)
+
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+Train Epoch: 5 [0/50000 (0%)]	Loss: 2.092357	Acc: 36.00%
+Train Epoch: 5 [1000/50000 (2%)]	Loss: 2.053308	Acc: 39.91%
+Train Epoch: 5 [2000/50000 (4%)]	Loss: 2.098891	Acc: 40.00%
+Train Epoch: 5 [3000/50000 (6%)]	Loss: 2.060663	Acc: 39.48%
+Train Epoch: 5 [4000/50000 (8%)]	Loss: 1.999516	Acc: 39.39%
+Train Epoch: 5 [5000/50000 (10%)]	Loss: 2.095879	Acc: 39.98%
+Train Epoch: 5 [6000/50000 (12%)]	Loss: 2.035275	Acc: 39.92%
+Train Epoch: 5 [7000/50000 (14%)]	Loss: 2.088478	Acc: 39.59%
+Train Epoch: 5 [8000/50000 (16%)]	Loss: 2.063067	Acc: 39.53%
+Train Epoch: 5 [9000/50000 (18%)]	Loss: 2.104100	Acc: 39.48%
+Train Epoch: 5 [10000/50000 (20%)]	Loss: 2.057317	Acc: 39.34%
+Train Epoch: 5 [11000/50000 (22%)]	Loss: 2.097958	Acc: 39.19%
+Train Epoch: 5 [12000/50000 (24%)]	Loss: 2.073987	Acc: 39.02%
+Train Epoch: 5 [13000/50000 (26%)]	Loss: 2.066103	Acc: 39.06%
+Train Epoch: 5 [14000/50000 (28%)]	Loss: 2.115782	Acc: 39.05%
+Train Epoch: 5 [15000/50000 (30%)]	Loss: 2.111520	Acc: 38.94%
+Train Epoch: 5 [16000/50000 (32%)]	Loss: 2.071710	Acc: 38.83%
+Train Epoch: 5 [17000/50000 (34%)]	Loss: 2.000098	Acc: 38.90%
+Train Epoch: 5 [18000/50000 (36%)]	Loss: 2.057003	Acc: 38.95%
+Train Epoch: 5 [19000/50000 (38%)]	Loss: 2.094407	Acc: 38.96%
+Train Epoch: 5 [20000/50000 (40%)]	Loss: 2.075168	Acc: 39.01%
+Train Epoch: 5 [21000/50000 (42%)]	Loss: 2.064161	Acc: 39.03%
+Train Epoch: 5 [22000/50000 (44%)]	Loss: 2.063540	Acc: 39.11%
+Train Epoch: 5 [23000/50000 (46%)]	Loss: 2.009536	Acc: 39.20%
+Train Epoch: 5 [24000/50000 (48%)]	Loss: 2.089295	Acc: 39.30%
+Train Epoch: 5 [25000/50000 (50%)]	Loss: 2.039407	Acc: 39.38%
+Train Epoch: 5 [26000/50000 (52%)]	Loss: 1.982438	Acc: 39.47%
+Train Epoch: 5 [27000/50000 (54%)]	Loss: 2.065688	Acc: 39.44%
+Train Epoch: 5 [28000/50000 (56%)]	Loss: 2.105918	Acc: 39.41%
+Train Epoch: 5 [29000/50000 (58%)]	Loss: 2.086061	Acc: 39.46%
+Train Epoch: 5 [30000/50000 (60%)]	Loss: 1.984459	Acc: 39.52%
+Train Epoch: 5 [31000/50000 (62%)]	Loss: 2.092889	Acc: 39.44%
+Train Epoch: 5 [32000/50000 (64%)]	Loss: 2.060075	Acc: 39.49%
+Train Epoch: 5 [33000/50000 (66%)]	Loss: 2.144267	Acc: 39.43%
+Train Epoch: 5 [34000/50000 (68%)]	Loss: 2.106431	Acc: 39.42%
+Train Epoch: 5 [35000/50000 (70%)]	Loss: 1.979332	Acc: 39.53%
+Train Epoch: 5 [36000/50000 (72%)]	Loss: 2.061472	Acc: 39.53%
+Train Epoch: 5 [37000/50000 (74%)]	Loss: 2.050271	Acc: 39.54%
+Train Epoch: 5 [38000/50000 (76%)]	Loss: 2.121120	Acc: 39.52%
+Train Epoch: 5 [39000/50000 (78%)]	Loss: 2.005211	Acc: 39.59%
+Train Epoch: 5 [40000/50000 (80%)]	Loss: 2.001151	Acc: 39.61%
+Train Epoch: 5 [41000/50000 (82%)]	Loss: 2.112725	Acc: 39.62%
+Train Epoch: 5 [42000/50000 (84%)]	Loss: 2.107175	Acc: 39.57%
+Train Epoch: 5 [43000/50000 (86%)]	Loss: 1.974757	Acc: 39.61%
+Train Epoch: 5 [44000/50000 (88%)]	Loss: 2.042679	Acc: 39.66%
+Train Epoch: 5 [45000/50000 (90%)]	Loss: 1.986081	Acc: 39.64%
+Train Epoch: 5 [46000/50000 (92%)]	Loss: 2.102955	Acc: 39.63%
+Train Epoch: 5 [47000/50000 (94%)]	Loss: 2.112298	Acc: 39.61%
+Train Epoch: 5 [48000/50000 (96%)]	Loss: 2.129933	Acc: 39.57%
+Train Epoch: 5 [49000/50000 (98%)]	Loss: 2.066889	Acc: 39.57%
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+
+Test set: Average loss: 2.0448, Accuracy: 4128/10000 (41%)
+
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
+[W pthreadpool-cpp.cc:90] Warning: Leaking Caffe2 thread-pool after fork. (function pthreadpool)
